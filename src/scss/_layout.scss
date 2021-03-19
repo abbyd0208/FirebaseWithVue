@@ -1,0 +1,80 @@
+.wrapper{ border: 1xp solid red;}
+
+.header{
+    border-top: 4px solid $greenLight;
+   border-bottom: 1px solid #eee;
+   margin-bottom: 30px;
+    .inner{ max-width: 1400px; margin: 0 auto; padding: 0 15px; height: 82px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .logo{
+        width: 150px; height: 33px;
+        background: url(../images/logo_cilclelinks.png) no-repeat center/contain;
+        a{ display: inline-block; width: 150px; height: 33px; text-indent: -300%; overflow: hidden; }
+    }
+    .menu{
+
+        a{  display:inline-block; margin-right:30px; 
+            // $size,$weight:300,$color,$spacing
+            @include text(16px,400,$black,2px);}
+            
+    }
+
+    .side_open{ border:1px solid red; display: none;}
+    @include media-breakpoint-down(md){
+        .inner{ height: 60px; justify-content: space-between;}
+        .logo{ width: 100px;}
+        .menu{ display: none;}
+        .side_open{ display: block;}
+    }
+
+}
+
+.container{
+    min-height: 85vh;
+    margin-bottom: 50px;
+}
+
+.footer{
+    height:44px; line-height: 44px;
+    border-top: 1px solid #eee;
+    text-align: center;
+    p{ @include text(13px,300,#666,1px) }
+}
+
+.wrapper{perspective:800px;}
+
+
+.side{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 1;
+    transform: perspective(2000px) rotateY(270deg); 
+    background: $greenLight;
+    transform-origin: right;
+    transition: transform .8s;
+    visibility: hidden;
+    .inner{
+        display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
+            padding-top: 50px;
+        a{ display: block; margin-bottom: 30px;
+            @include text(16px,300,#FFF,4px);
+            }
+    }
+    .side_clode{
+        width: 40px; height: 40px; position: absolute; right: 15px; top: 15px; border:1px solid #fff;
+    }
+    &.active{
+        visibility: visible;
+        transform: perspective(2000px) rotateY(360deg); 
+    }
+    
+}

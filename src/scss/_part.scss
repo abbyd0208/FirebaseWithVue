@@ -1,0 +1,278 @@
+.icon{ fill:$blue;
+    display: inline-block; width: 22px; height: 22px; 
+    img{ display: block; width: 100%; height: 100%;}
+}
+
+.label{ 
+    span{
+    color:$greenDark; padding: 5px 8px; width:50px; background:$greenLiter; border: 1px solid $greenLight; border-radius: 2px; margin-right: 10px; font-size: 14px; letter-spacing: 2px; word-wrap:break-word;
+    } 
+}
+
+
+
+// 按鈕的mixin
+@mixin btn_solid ($bgColor:$greenLight){
+    display: inline-block;
+    text-align: center;
+    background: $bgColor;
+    padding: 8px 10px;
+    border-radius: 3px;
+    color: $white;
+    letter-spacing: 1px;
+    font-weight: 300;
+    text-shadow: 0px 1px 5px rgba($color: $black, $alpha: 0.2);
+    transition: .3s;
+}
+
+
+.btn_1{ 
+    @include btn_solid($greenLight);
+    &:hover{
+        background: darken($color: $greenLight, $amount: 5);
+    }
+}
+
+.btn_2{ 
+    @include btn_solid($blue);
+    &:hover{
+        background: darken($color: $blue, $amount: 5);
+    }
+}
+
+
+.btn_3{ 
+    
+    @include btn_solid($gradientBlue);
+    &:hover{
+        background-image: linear-gradient(-90deg, #1061A3 31.79%, rgba(69, 167, 185, 0) 157.71%);
+    }
+}
+
+
+.btn_4{ 
+    @include btn_solid($gradientgreen);
+    &:hover{
+        background-image: linear-gradient(-90deg, $greenLight 31.79%, rgba(69, 167, 185, 0) 157.71%);
+    }
+}
+
+.operate{
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    span{ flex: 1; margin: 1%; text-align: center;}
+    small{ display: inline-block; margin-bottom: 5px;}
+    [class^="btn"]{width: 100%;}
+}
+
+
+
+// 麵包屑
+.breadcrumb{
+    font-weight: 300; margin-bottom: 30px;
+    a{
+        &::after{ display: inline-block; content: '/'; margin: 0 5px;}
+    }
+    span{ color: #666;}
+    @include media-breakpoint-down(sm){
+        display: none;
+    }
+}
+
+
+// 文字的mixin
+@mixin text($size,$weight:300,$color,$spacing) {
+    font-size:$size ;
+    font-weight:$weight;
+    color: $color;
+    letter-spacing:$spacing ;
+}
+
+
+// 主題標題
+.subject_title{
+    // width: 364px; height: 106px;
+    position: relative; left: -100px; margin-bottom: 50px;
+    img{ height: 106px; position: absolute; left: 0; top: 0; }
+    h2{
+        // $size,$weight:300,$color,$spacing
+        @include text(28px,500,$blue,5px);
+        margin-left: 100px;}
+    p{ letter-spacing: 2px; margin-left: 150px; font-weight: 300;}
+
+    @include media-breakpoint-down(lg){
+        left: -50px;
+    }
+
+    @include media-breakpoint-down(sm){
+        img{ height: 90px;}
+        h2{ @include text(21px,500,$blue,5px);}
+        p{margin-left: 100px;}
+        left: 0px;
+    }
+}
+
+
+// mixin 區塊標題
+@mixin section_title($url_after,$color) {
+    width: 310px; margin: 0 auto;
+    &::before{ display: block; content:''; width: 52px;  height: 53px; background-image: url(../images/sparks.png) ; background-repeat:  no-repeat; background-size: contain; margin-left: 30px;  }
+    &::after{ display: block; content: ''; width: 310px; height: 76px; background:$url_after ; background-size: contain; margin-top: -30px;}
+    h3{font-size: 24px; letter-spacing: 8px; color:$color ;  font-weight: 500; text-align: center; margin-top: -15px;}
+}
+
+// 區塊標題
+.section_title{
+
+    @include section_title(url(../images/circle_green.png),$black);
+    &.white{
+        @include section_title(url(../images/circle.png),$white)
+    }
+}
+
+.unit_title{ 
+    text-align: center; margin: 30px auto;
+    // $size,$weight:300,$color,$spacing
+    @include text(21px,400,$blue,5px);
+    &::before{ display: inline-block; content: ''; width: 22px; height: 23px; background: url(../images/sparks.png) no-repeat; background-size: contain; margin-bottom: 20px; margin-right: -10px;}
+}
+
+// mixin 焦點卡片狀態
+@mixin card_list_1status($bgColor) {
+    &::before{ display: block; content:''; width: 55px; height: 55px; position: absolute; left: 0; top: 0; background-image: linear-gradient(135deg, $bgColor 0%, $bgColor 50%,  transparent 50%); border-radius: 3px;}
+}
+
+.card_list_1{
+    display: flex; justify-content: space-evenly; text-align: center;
+    .card{
+        width: 22%; padding: 15px; display: flex; flex-direction: column; border-radius: 3px; position: relative;
+        box-shadow: 0px 8px 10px rgba($color: $black, $alpha: 0.2);
+        
+        h5{
+            // $size,$weight:300,$color,$spacing
+              @include text(18px,500,$black,2px);  
+            margin-bottom: 10px;
+        }
+        .date{ 
+            // $size,$weight:300,$color,$spacing
+            @include text(16px,300,$grey,0px); 
+            &::after{ display: block; content:''; width: 20px; height: 4px; background: #E5E5E5;
+                margin: 5px auto 10px auto; 
+            } 
+        }
+        .content{
+            // $size,$weight:300,$color,$spacing
+            @include text(16px,300,$black,0px);
+            margin-bottom: 10px;
+        }
+        a{ align-self:flex-end;  
+            // $size,$weight:300,$color,$spacing
+            @include text(14px,400,#1060A0,5px);
+            &::after{}
+        }
+        &.new{ @include card_list_1status($greenDark)}
+        &.point{@include card_list_1status(#EDB010)}
+        &.soon{ @include card_list_1status($blue)}
+        .content{ text-align: left;}
+    }
+}
+
+
+.mission{
+    h2.title{  @include text(21px,300,$black,0px); margin-bottom: 20px; }
+    h5{  @include text(21px,300,$black,0px); margin-bottom: 10px;}
+    .item{ display: flex; align-items: center; margin-bottom: 15px; 
+        &.bg{ line-height: 1.8; background: $greenLiter; padding: 10px; border-radius: 5px; align-items: flex-start;
+            letter-spacing: 1px; font-weight: 300;
+        }
+        &.company{
+            align-items: flex-start;
+            line-height: 1.8; letter-spacing: 1px; font-weight: 300;
+        }
+        h4{ font-weight: 500; margin-bottom: 8px;}
+    }
+    .fa-clock,.fa-comment-dots,.fa-map-marker-alt,.fa-briefcase,.fa-cog{font-size: 18px; color: $blue;  margin-right: 10px; width: 24px; }
+    
+}
+
+
+.card_list_2{
+    display: flex; justify-content: space-between; flex-wrap: wrap;
+    .card{
+        width: 30%; padding: 12px; border-radius: 3px; overflow: hidden; position: relative;
+        box-shadow: 0px 0px 10px rgba(0,0,0,0.1);  margin-bottom: 30px;;
+        .cover{ height: 180px; width: 150%; margin-bottom: -40px; overflow: hidden;
+            transform: skew(-10deg, -10deg) translateX(-60px) translateY(-100px); 
+            img{ width: 100%;  transform: skew(10deg, 10deg) translateX(-50px);}
+        }
+       
+        &.recommend{
+           &::before{ display: block; width: 100%; height: 150px; content: ''; position: absolute; right: 0; top: 0;
+                background-image: 
+                    url(../images/Star.png), 
+                    linear-gradient(to bottom,  rgb(255, 213, 0) 0%,rgba(255,255,255,0) 100%); 
+                background-repeat: no-repeat, no-repeat;
+                background-position: 96% 75%,0 0;
+                background-size: 30px 28px, cover;
+            }
+        }
+        &.expired{
+            background: #D8D8D8;
+            .cover img{filter:grayscale(1);}
+            .fa-clock,.fa-comment-dots,.fa-map-marker-alt,.fa-briefcase,.fa-cog{ color: $black;}
+            .item{
+                &.bg{ background: rgba(0,0,0,0.1);}
+                .label span{filter:grayscale(1); }
+            }
+        }
+
+        &.recommend.expired{
+            
+            &::before{ display: block; width: 100%; height: 150px; content: ''; position: absolute; right: 0; top: 0;
+                background-image: 
+                    url(../images/Star_expired.png), 
+                    linear-gradient(to bottom,  rgb(119, 119, 119) 0%,rgba(255,255,255,0) 100%); 
+                background-repeat: no-repeat, no-repeat;
+                background-position: 96% 75%,0 0;
+                background-size: 30px 28px, cover;
+            }
+        }
+    }
+
+    @include media-breakpoint-down(lg){
+        .card{ width: 48%;}
+    }
+
+    @include media-breakpoint-down(sm){
+        .card{ width: 100%;}
+    }
+}
+
+.card_list_3{
+   
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    .card{
+        background: #fff;
+       padding: 20px 30px;
+       width: 22%;
+       box-shadow: 0px 30px 50px 0px rgba(119, 119, 119,0.5);
+        position: relative;
+        @for $i from 1 through 4 {
+            &:nth-last-of-type(#{$i}){
+                transform: translateY(#{$i*20}px);
+            }
+        }
+        .title{margin-bottom: -20px;  margin-left: 15px; color: $greenLight;
+            &::before{ display: block; content: ''; width: 44px;height: 44px; background: url(../images/spark.png) no-repeat center center / cover;  position: absolute; left: -10px; top: 10px; }
+        }
+        .content{
+            text-align: center;
+            img{ margin-bottom: 30px;}
+            p{text-align: left;}
+           
+        }
+    }
+}
