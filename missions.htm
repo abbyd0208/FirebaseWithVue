@@ -27,7 +27,7 @@
                 <h1 class="logo"> <a href="#">CiRCLELiNKS</a></h1>
                 <div class="menu">
                     <a href="about.htm">任務旋轉門</a>
-                    <a href="mission.htm">任務列表</a>
+                    <a href="missions.htm">任務列表</a>
                 </div>
                 <div class="side_open">
                     <span>三</span>
@@ -40,56 +40,56 @@
                 <h2>任務旋轉門</h2>
                 <p>發掘解決方案和潛在夥伴</p>
             </div>
-            <h4 class="unit_title">任務</h4>
-
-            <div id="app">
-                <ul class="card_list_2">
-                    <li class="card mission" v-for="(item,index) in list" 
-                        :key="item.id"  
-                        :data-id="item.id" 
-                        :class="{'recommend':item.recommend == 1,'expired': date > new Date(item.publish_end_date) }" >
-                        
-                        <div>
-                            <div class="cover">
-                                <img :src="'/src/images/cover/'+item.cover" alt="">
-                            </div>
-                            <div class="item">
-                                <i class="fas fa-clock"></i>
-                                <span>{{item.subject_start_date}}~{{item.subject_end_date}}</span>
-                            </div>
-                            <h5>{{item.subject}}</h5>
-                            <div class="item bg">
-                                <i class="fas fa-comment-dots"></i>
-                                <p>{{item.subject_intro}}</p>
-                            </div>
-                            <div class="item">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <div class="label">
-                                    <span v-for="item in location">{{item}}</span>
+            
+            <div class="subject_content missions">
+                <h4 class="unit_title">任務</h4>
+                <div id="app">
+                    <ul class="card_list_2">
+                        <li class="card mission" v-for="(item,index) in list" 
+                            :key="item.id"  
+                            :data-id="item.id" 
+                            :class="{'recommend':item.recommend == 1,'expired': date > new Date(item.publish_end_date) }" >
+                            
+                            <div>
+                                <div class="cover">
+                                    <img :src="'/src/images/cover/'+item.cover" alt="">
+                                </div>
+                                <div class="item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>{{item.subject_start_date}}~{{item.subject_end_date}}</span>
+                                </div>
+                                <h5>{{item.subject}}</h5>
+                                <div class="item bg">
+                                    <i class="fas fa-comment-dots"></i>
+                                    <p>{{item.subject_intro}}</p>
+                                </div>
+                                <div class="item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <div class="label">
+                                        <span v-for="item in location">{{item}}</span>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <i class="fas fa-cog"></i>
+                                    <div class="label">
+                                        <span>{{item.industries}}</span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="item">
-                                <i class="fas fa-cog"></i>
-                                <div class="label">
-                                    <span>{{item.industries}}</span>
-                                </div>
+    
+                            <div class="operate">
+                                <span>
+                                    <a :href="'/mission.htm'+'#'+item.id" class="btn_1">看更多</a>
+                                </span>
+                                <span>
+                                    <small>刊登截止日 {{item.publish_end_date}}</small>
+                                    <a class="btn_2" href="https://forms.gle/CQGu1ahdt4jgZMDr5" target="_blank">我有興趣</a>
+                                </span>
                             </div>
-                        </div>
-
-                        <div class="operate">
-                            <span>
-                                <a :href="'/mission/'+item.id+'.htm'" class="btn_1">看更多</a>
-                            </span>
-                            <span>
-                                <small>刊登截止日 {{item.publish_end_date}}</small>
-                                <a class="btn_2" href="https://forms.gle/CQGu1ahdt4jgZMDr5" target="_blank">我有興趣</a>
-                            </span>
-                        </div>
-                    </li>
-                </ul>
-                {{expired}}
+                        </li>
+                    </ul>
+                </div>
             </div>
-           
             
         </div>
         <div class="footer">
@@ -98,7 +98,7 @@
     </div>
 
     <script src="dist/bundle.js"></script>
-    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+   <!-- vue、axios -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
@@ -115,16 +115,8 @@
                         let singleLocation = vm.list[i].locations.split(',');
                         return singleLocation
                     }
-                },
-                expired(){
-                    let vm = this;
-                    let nowTime = new Date();
-                    let endDate = '';
-                    
-                    for( var i=0;i<vm.list.length; i++ ){
-                        endDate = new Date( vm.list[i].publish_end_date ) ;
-                    }
                 }
+                
             },
             mounted : function(){
                 console.log(this.list);  
@@ -132,7 +124,7 @@
             created(){
                 let vm = this;
                 axios.get('./src/js/data.json').then((response)=>{
-                    console.log(response.data);
+                    // console.log(response.data);
                     vm.list=response.data;
                 }).catch((response) => {
                     /* 失敗，發生錯誤*/

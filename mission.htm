@@ -36,86 +36,87 @@
                 </div>
             </div>
         </div>
-        <div class="container mission">
-            <!-- 過期要在container上加上 recommend expired -->
-
-            <div class="subject_title">
-                <img src="./src/images/subject_title_img.png" alt="">
-                <h2>任務旋轉門</h2>
-                <p>發掘解決方案和潛在夥伴</p>
-            </div>
-            <div class="row mt-3">
-                <div class="col-12">
-                    <div class="breadcrumb"><a href="missions.htm">任務旋轉門</a><span>金針葉原料通路合作機會（限銷售台灣、中國大陸以外地區） </span></div>
+        <div id="app">
+            <div class="container " >
+                <div class="subject_title">
+                    <img src="./src/images/subject_title_img.png" alt="">
+                    <h2>任務旋轉門</h2>
+                    <p>發掘解決方案和潛在夥伴</p>
                 </div>
-                <div class="col-12 col-md-4 mr-lg-5">
-                    <div class="cover">
-                        <img src="/src/images/demo.jpg" alt="">
-                    </div>
-                </div>
-                <div class="col-12 col-md-7">
-                    <h2 class="title">金針葉原料通路合作機會（限銷售台灣、中國大陸以外地區）</h2>
-                    <div class="mission_content">
-                        <div class="item">
-                            <i class="fas fa-clock"></i>
-                            <span>2021/01/01~2021/12/24</span>
+                <div class="subject_content mission" :class="{'recommend':page.recommend == 1, 'expired':  date > new Date(page.publish_end_date)}">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="breadcrumb"><a href="missions.htm">任務旋轉門</a><span>{{page.subject}}</span></div>
                         </div>
-                        <div class="item bg">
-                            <i class="fas fa-comment-dots"></i>
-                            <p>提供能幫助入睡、舒緩情緒的高質量金針葉原料。金針葉除了可以製作成養生茶，還可以用於製作各式各樣的養生食品。其中提供能幫助入睡、舒緩情緒的高質量金針葉原料。金針葉除了可以製作成養生茶，還可以用於製作各</p>
-                        </div>
-                        <div class="item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <div class="label">
-                                <span>台灣</span><span>日本</span>
+                        <div class="col-12 col-md-4 mr-lg-5">
+                            <div class="cover">
+                                <img :src="'/src/images/'+page.cover" alt="">
                             </div>
                         </div>
-                        <div class="item">
-                            <i class="fas fa-cog"></i>
-                            <div class="label">
-                                <span>製造</span>
+                        <div class="col-12 col-md-7">
+                            <h2 class="title">{{page.subject}}</h2>
+                            <div class="mission_content">
+                                <div class="item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>{{page.subject_start_date}}~{{page.subject_end_date}}</span>
+                                </div>
+                                <div class="item bg">
+                                    <i class="fas fa-comment-dots"></i>
+                                    <p>{{page.company_intro}}</p>
+                                </div>
+                                <div class="item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <div class="label" v-if="locations">
+                                        <span  v-for="(item,index) in locations" :key="index">{{item}}</span>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <i class="fas fa-cog"></i>
+                                    <div class="label">
+                                        <span>{{page.industries}}</span>
+                                    </div>
+                                </div>
+                                <div class="item company">
+                                    <i class="fas fa-briefcase"></i>
+                                    <div>
+                                        <h5 v-if="page.company_name">{{page.company_name}}</h5>
+                                        <p>{{page.company_intro}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="operate">
+                                <span>
+                                    <a href="#" class="btn_1">複製連結&分享</a>
+                                </span>
+                                <span>
+                                    <small>刊登截止日 {{page.publish_end_date}}</small>
+                                    <a href="https://forms.gle/CQGu1ahdt4jgZMDr5" class="btn_2">我有興趣</a>
+                                </span>
+                            </div>
+        
+                            <div class="expired_block">
+                                <div class="content">
+                                    <img src="/src/images/mission_close.png" alt="任務已關閉">
+                                    <div>
+                                        <h2>此任務已結案！</h2>
+                                        <p>是否前往查看其它任務？</p>
+                                        <a href="missions.htm" class="btn_3">前往任務列表 <i class="fas fa-arrow-circle-right"></i></a>
+                                    </div>
+                                </div>
+                                <div class="ad_block">
+                                    <a href="#"><img src="/src/images/contact_banner.svg" alt=""></a>
+                                </div>
                             </div>
                         </div>
-                        <div class="item company">
-                            <i class="fas fa-briefcase"></i>
-                            <div class="">
-                                <h5>我是公司名稱</h5>
-                                <p>我是公司側寫我是公司側寫我是公司側寫我是公，公司側寫我側寫我是公司側寫我是公，公司側側寫我是公司側寫我是公，公司側側寫我是公司側寫我是公，公司側側寫我是側側寫我是公司側寫我是公，公司側側寫我是公司側寫我是公，公司側側寫我是公司側寫我是公</p>
-                            </div>
+                        
+                        <div class="btn_back_block">
+                            <a class="btn_back" href="missions.htm"><i class="fas fa-arrow-alt-circle-left"></i>返回任務列表 </a>
                         </div>
+                    </div>
 
-                       
-                    </div>
-                    <hr>
-                    <div class="operate">
-                        <span>
-                            <a href="mission.htm" class="btn_1">看更多</a>
-                        </span>
-                        <span>
-                            <small>刊登截止日 2021/03/16</small>
-                            <a href="#" class="btn_2">我有興趣</a>
-                        </span>
-                    </div>
-
-                    <div class="expired_block">
-                        <div class="content">
-                            <img src="/src/images/mission_close.png" alt="任務已關閉">
-                            <div>
-                                <h2>此任務已結案！</h2>
-                                <p>是否前往查看其它任務？</p>
-                                <a href="missions.htm" class="btn_3">前往任務列表 <i class="fas fa-arrow-circle-right"></i></a>
-                            </div>
-                        </div>
-                        <div class="ad_block">
-                            <a href="#"><img src="/src/images/contact_banner.svg" alt=""></a>
-                        </div>
-                    </div>
                 </div>
-                
-                <div class="btn_back_block">
-                    <a class="btn_back" href="missions.htm"><i class="fas fa-arrow-alt-circle-left"></i>返回任務列表 </a>
-                </div>
-
+               
             </div>
         </div>
         <div class="footer">
@@ -124,8 +125,44 @@
     </div>
 
     <script src="dist/bundle.js"></script>
-   
+    <!-- vue、axios -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        const app = new Vue({
+            el:'#app',
+            data:{
+                page:{},
+                date:new Date(),
+                expired:false
+            },
+            computed:{
+               locations(){
+                   let vm = this;
+                   return vm.page.locations.split(',');
+               }
+            },
+            created(){
+                let nowPage = window.location.hash.split('#')[1];
+                let vm = this;
 
+                axios.get('./src/js/data.json').then((response)=>{
+                   let data = response.data;
+                   let nowData = data.filter((item,index)=>{
+                        if(item.id == nowPage){
+                            return true
+                        }
+                   });
+             
+                   vm.page = nowData[0];
+
+                }).catch((response) => {
+                    /* 失敗，發生錯誤*/
+                    console.log(response);
+                });;
+            }
+        })
+    </script>
 </body>
 
 </html>

@@ -1,4 +1,8 @@
-.wrapper{ overflow: hidden;}
+body.mission{
+    background: url(../images/mission_deco.png) no-repeat left bottom / 65%;
+}
+
+.wrapper{ overflow: hidden; perspective:800px;}
 
 .header{
     border-top: 4px solid $greenLight;
@@ -35,6 +39,7 @@
 .container{
     min-height: 85vh;
     margin-bottom: 50px;
+   
 }
 
 .footer{
@@ -44,8 +49,6 @@
     text-align: center;
     p{ @include text(13px,300,#666,1px) }
 }
-
-.wrapper{perspective:800px;}
 
 
 .side{
@@ -82,10 +85,16 @@
 
 .apply_btn{ width: 48px; height: 180px; line-height: 48px; 
     text-align: center; background: $blue; color: $white; position: fixed; right: 0; top: 300px; -webkit-writing-mode: vertical-lr;
-    writing-mode: vertical-lr; 
+    writing-mode: vertical-lr;  transition: .3s;
     @include text(16px,300,$white,4px);
-  
+    
     .fa-arrow-circle-right{ display: inline-block; margin-top: 20px; margin-left: 5px;}
 
-    &::after{ display: block; content: ''; width: 100%; height: 40px; border: 1px solid red; position: absolute; left: 0; bottom: 0;  }
+    &::after{ display: block; content: ''; width: 0;
+        height: 0;
+        border: 25px solid;
+        border-color: $greenDark $greenDark transparent transparent; position: absolute; left: 0; bottom: -50px; }
+    &:hover{
+        background: darken($color: $blue, $amount: 5);
+    }
 }

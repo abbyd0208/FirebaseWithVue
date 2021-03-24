@@ -1,5 +1,4 @@
 // 介紹頁
-
 .visual{
     // *{ border: 1px solid #000;}
     background-image: linear-gradient(135deg, rgba(255,214,0,0.2) 0%,rgba(255,255,255,0) 20%), 
@@ -13,9 +12,8 @@
 
     .doors{
         width: 17vw; height: 24vw;  margin:  0 auto; position: relative;  perspective: 600px;
-        .door1,.door2{     width: 17vw; height: 24vw; position: absolute; left: 0; top: 0;}
-        .door1{ 
-            animation: door1 3s both;  animation-delay:.5s;  border: 1px solid $blue;
+        .door1,.door2{ width: 17vw; height: 24vw; position: absolute; left: 0; top: 0;}
+        .door1{ animation: door1 3s both;   border: 1px solid $blue;
             
             &::before{ content: ''; display: block; width: 50%; height: 100%; position: absolute; left: 0; top: 0;
                 background: linear-gradient(9.54deg, rgba(98, 251, 255, 0.19) 15.47%, #4DB3C9 72.68%);}
@@ -35,39 +33,64 @@
         } 
 
         @include media-breakpoint-down(sm){
-            width: 50vw; height: 60vw;
-            .door1,.door2{ width: 50vw; height: 60vw; }
+            width: 45vw; height: 60vw;
+            .door1,.door2{ width: 45vw; height: 60vw; }
         }
     }
 
     @keyframes door1 {
-        0%{ transform: rotate3d(0, 1, 0, 0deg); opacity: 0;}
-        100%{ transform: rotate3d(0, 1, 0, -30deg); opacity: 1;}
+        0%{ transform: rotate3d(0, 1, 0, 0deg) translateY(-100px); opacity: 0; }
+        100%{ transform: rotate3d(0, 1, 0, -30deg) translateY(0px); opacity: 1;}
     }
 
     @keyframes door2 {
-        0%{ transform: rotate3d(0, 1, 0, 0deg); opacity: 0;}
-        100%{ transform: rotate3d(0, 1, 0, 30deg); opacity: 1;}
+        0%{ transform: rotate3d(0, 1, 0, 0deg) translateY(-100px); opacity: 0;}
+        100%{ transform: rotate3d(0, 1, 0, 30deg) translateY(0px); opacity: 1;}
     }
+
+
 
     .decobox{
         width: 70vw;  position: absolute; left: 50%; top: 35%; transform: translateX(-50%);
+        @include media-breakpoint-down(md){
+            width: 90vw;
+        }
+       
         @include media-breakpoint-down(sm){
-            width: 85vw;
+            // width: 90vw;
         }
     }
+
+    @keyframes title{
+        0%{ opacity: 0;}
+        100%{ opacity: 1;}
+    }
+
     .title{ 
         margin-bottom: -5%; margin-left: 5%;
         h3{ @include text(28px, 500, $blue, 2px); margin-bottom: -10px;}
         p{letter-spacing: 3px;}
         @include media-breakpoint-down(sm){
-            margin-bottom: -5%;margin-left: 0%;
+            margin-bottom: -5%;
             h3{ font-size: 21px;}
         }
+        animation: title 3s  both;
     }
+
+    @keyframes sparks{
+        0%,80%{opacity:0; transform:scale(.8);}
+        30%{opacity:1;transform:scale(1)}
+        100%{ opacity: 1;transform:scale(1) }
+    }
+
+    .spark1,.spark2{ width: 6vh; height: 6vh;  position: absolute; opacity: 0; }  
+    .spark1{ left: 0; bottom: 0; background: url(../images/sparks.png) no-repeat center center/ contain; 
+            animation: sparks 1.5s both;}
+    .spark2{ right: 0; top: 0; background: url(../images/sparks.png) no-repeat center center/ contain; 
+            animation: sparks 1.5s both;}
     .deco{
         position: relative; text-align: center;
-        >p{display: inline-block; 
+        >p{display: inline-block; margin: 0 -1px;
             font-family: 'Montserrat', sans-serif;
             @include text(7.5vw,900, $blue,0px);
             text-shadow: 0px 5px 15px rgba(98, 251, 255, 0.71);}
@@ -76,10 +99,9 @@
         }
     }
 
-
     @for $i from 1 through 13{
         .deco>p:nth-of-type(#{$i}){
-            animation: textanimate 1s both;
+            animation: textanimate 1.5s both;
             animation-delay:$i*.1s
          }
      }
@@ -91,6 +113,7 @@
     
 }
 
+// 關於旋轉門
 .secction{
         padding:  10vw 30px;
     .content{
@@ -103,11 +126,53 @@
     // 旋轉門介紹
     &.intro{
         position: relative;
-        &::before{ display: block; width: 110%; height: 150px; content: '';  background: linear-gradient(to bottom, rgb(227, 247, 247) 0%,rgb(255,255,255) 100%); position: absolute; left: -5%; top: -20%; z-index: 1; transform: rotateZ(-3deg); }
+        &::before{ display: block; width: 110%; height: 150px; content: '';  background: linear-gradient(to bottom, rgb(227, 247, 247) 0%,rgb(255,255,255) 100%); position: absolute; left: -5%; top: -18%; z-index: 1; transform: rotateZ(-3deg); }
         margin-bottom: 100px; 
         background: url(../images/intro.png) no-repeat 120px bottom/ 40%;
         p{ margin-bottom: 30px; line-height: 1.8;}
         .btn_center{ margin-top: 50px;}
+      
+
+        //  @include media-breakpoint-down(sm){
+        //     width: 45vw; height: 60vw;
+        //     .door1,.door2{ width: 45vw; height: 60vw; }
+        // }
+
+
+        @keyframes doorShadow1{
+            0%{transform: translateX(-48%) translateY(50px) rotateY(360deg); opacity: 0;}
+            100%{ transform: translateX(-48%) translateY(0) rotateY(354deg); opacity: 1;}
+        }
+
+        @keyframes doorShadow2{
+            0%{transform: translateX(-45%) translateY(50px) rotateY(180deg); opacity: 0;}
+            100%{transform: translateX(-45%) translateY(0px) rotateY(187deg); opacity: 1;}
+        }
+
+        .door_shadow{ width: 17vw; height: 24vw;  position: absolute; left: 50%; top: -80px;  z-index: 2; 
+            .shadow_1,.shadow_2{width: 17vw; height: 24vw; }
+
+            .shadow_1{
+                
+                // transform: translateX(-48%) translateY(0) rotateY(354deg);
+                background: linear-gradient(3deg, rgba(255, 255, 255, 0) 80%, rgba(77, 198, 201, 0.2) 100%);
+                filter: blur(5px);
+                // border: 1px solid red;
+                position: absolute; left: 0; top: 0;
+                animation: doorShadow1 3s both;
+                
+            }
+            .shadow_2{ 
+               
+                // transform: translateX(-45%) translateY(-0px) rotateY(187deg);
+                background: linear-gradient(4deg, rgba(255, 255, 255, 0) 80%, rgba(77, 198, 201, 0.2) 100%);
+                filter: blur(5px);
+                // border: 1px solid green;
+                position: absolute; left: 0; top: 0;
+                animation: doorShadow2 3s both;
+            }
+        }
+
         @include media-breakpoint-down(md){
             // padding: 200px 0;
         }
@@ -117,6 +182,11 @@
             background-position:-50px 100%;
             background-size: contain;
             margin-bottom: 30px;
+
+            .door_shadow{
+                width: 45vw; height: 60vw; top:0px;
+                .shadow_1,.shadow_2{  width: 45vw; height: 60vw;}
+            }
         }
     }
     // 刊登步驟
@@ -199,14 +269,12 @@
             }
             .btn_center{ text-align: center;}
         }
-        
     }
 
 }
 
-
 // 任務內頁
-.container.mission{
+.subject_content.mission{
     position: relative;
     .cover{  padding-bottom:65%;  height: 0; width: 100%; overflow: hidden; border: 1px solid #eee;
         img{ width: 100%; height: auto; display: block;}
@@ -223,7 +291,6 @@
                 .fa-arrow-alt-circle-left{ margin-right: 8px;}
             }
         }
-      
     }
 
     .expired_block{ display: none;}
@@ -237,6 +304,7 @@
     
     // 過期
     &.expired{ 
+        hr{ display: none;}
         .mission_content{ display: none;}
         .operate{ display: none;}
         .expired_block{
@@ -265,4 +333,10 @@
     
    
 }
+
+// 任務列表
+.subject_content.missions{
+   
+}
+
 
