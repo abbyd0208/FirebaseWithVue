@@ -1,2 +1,7 @@
 import './scss/style.scss';
-window.$ = window.jQuery = require('jquery');
+import './js/page';
+
+
+
+
+

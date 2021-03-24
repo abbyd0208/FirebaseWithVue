@@ -16,10 +16,10 @@
     display: inline-block;
     text-align: center;
     background: $bgColor;
-    padding: 8px 10px;
+    padding: 8px 14px;
     border-radius: 3px;
     color: $white;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
     font-weight: 300;
     text-shadow: 0px 1px 5px rgba($color: $black, $alpha: 0.2);
     transition: .3s;
@@ -44,6 +44,7 @@
 .btn_3{ 
     
     @include btn_solid($gradientBlue);
+    .fa-arrow-circle-right{ margin-left: 4px;}
     &:hover{
         background-image: linear-gradient(-90deg, #1061A3 31.79%, rgba(69, 167, 185, 0) 157.71%);
     }
@@ -116,6 +117,7 @@
 
 // mixin 區塊標題
 @mixin section_title($url_after,$color) {
+ 
     width: 310px; margin: 0 auto;
     &::before{ display: block; content:''; width: 52px;  height: 53px; background-image: url(../images/sparks.png) ; background-repeat:  no-repeat; background-size: contain; margin-left: 30px;  }
     &::after{ display: block; content: ''; width: 310px; height: 76px; background:$url_after ; background-size: contain; margin-top: -30px;}
@@ -124,11 +126,16 @@
 
 // 區塊標題
 .section_title{
-
     @include section_title(url(../images/circle_green.png),$black);
+    margin-bottom: 50px;
     &.white{
-        @include section_title(url(../images/circle.png),$white)
+        @include section_title(url(../images/circle.png),$white);
+        margin-left:0px ;
+        @include media-breakpoint-down(md){
+            margin: 0 auto 50px auto;
+        }
     }
+   
 }
 
 .unit_title{ 
@@ -201,12 +208,21 @@
     display: flex; justify-content: space-between; flex-wrap: wrap;
     .card{
         width: 30%; padding: 12px; border-radius: 3px; overflow: hidden; position: relative;
-        box-shadow: 0px 0px 10px rgba(0,0,0,0.1);  margin-bottom: 30px;;
+        box-shadow: 0px 0px 10px rgba(0,0,0,0.1);  margin-bottom: 30px;
+        display: flex; flex-direction: column; justify-content: space-between;
         .cover{ height: 180px; width: 150%; margin-bottom: -40px; overflow: hidden;
             transform: skew(-10deg, -10deg) translateX(-60px) translateY(-100px); 
             img{ width: 100%;  transform: skew(10deg, 10deg) translateX(-50px);}
         }
-       
+        .item{
+            p{ display: -webkit-box;
+                -webkit-line-clamp: 3; //行數
+                -webkit-box-orient: vertical;
+                white-space: normal;
+                overflow: hidden;
+            }
+            
+        }
         &.recommend{
            &::before{ display: block; width: 100%; height: 150px; content: ''; position: absolute; right: 0; top: 0;
                 background-image: 
@@ -219,6 +235,7 @@
         }
         &.expired{
             background: #D8D8D8;
+            .operate{ visibility: hidden;}
             .cover img{filter:grayscale(1);}
             .fa-clock,.fa-comment-dots,.fa-map-marker-alt,.fa-briefcase,.fa-cog{ color: $black;}
             .item{
@@ -228,7 +245,6 @@
         }
 
         &.recommend.expired{
-            
             &::before{ display: block; width: 100%; height: 150px; content: ''; position: absolute; right: 0; top: 0;
                 background-image: 
                     url(../images/Star_expired.png), 
@@ -253,16 +269,18 @@
    
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-around; 
+    margin-top:-145px;
+    margin-bottom: 200px;
     .card{
         background: #fff;
-       padding: 20px 30px;
-       width: 22%;
-       box-shadow: 0px 30px 50px 0px rgba(119, 119, 119,0.5);
+        padding: 40px 30px;
+        width: 22%;
+        box-shadow: 0px 30px 50px 0px rgba(119, 119, 119,0.5);
         position: relative;
         @for $i from 1 through 4 {
             &:nth-last-of-type(#{$i}){
-                transform: translateY(#{$i*20}px);
+                transform: translateY(#{$i*60}px);
             }
         }
         .title{margin-bottom: -20px;  margin-left: 15px; color: $greenLight;
@@ -275,4 +293,22 @@
            
         }
     }
+    @include media-breakpoint-down(md){
+        margin-top: 0px; margin-bottom: 0px;
+        .card{ width: 42%;  margin-bottom: 50px;
+            @for $i from 1 through 4 {
+                &:nth-last-of-type(#{$i}){
+                    transform: translateY(0px);
+                }
+            }
+        }
+       
+    }
+
+    @include media-breakpoint-down(sm){
+        .card{
+            width: 100%;
+        }
+    }
+
 }

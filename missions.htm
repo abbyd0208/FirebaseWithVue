@@ -40,137 +40,57 @@
                 <h2>任務旋轉門</h2>
                 <p>發掘解決方案和潛在夥伴</p>
             </div>
-
-            
-
             <h4 class="unit_title">任務</h4>
-            <ul class="card_list_2">
-                <li class="card mission">
-                    <div class="cover">
-                        <img src="/src/images/demo.jpg" alt="">
-                    </div>
-                    <div class="item">
-                        <i class="fas fa-clock"></i>
-                        <span>2021/01/01~2021/12/24</span>
-                    </div>
-                    <h5>金針葉原料通路合作機會（限銷售台灣、中國大陸以外地區）</h5>
-                    <div class="item bg">
-                        <i class="fas fa-comment-dots"></i>
-                        <p>提供能幫助入睡、舒緩情緒的高質量金針葉原料。金針葉除了可以製作成養生茶，還可以用於製作各式各樣的養生食品。其中最常見的加工......</p>
-                    </div>
-                    <div class="item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div class="label">
-                            <span >台灣</span><span >日本</span>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <i class="fas fa-cog"></i>
-                        <div class="label">
-                            <span >製造</span>
-                        </div>
-                    </div>
-                    <div class="operate">
-                        <span>
-                            <a href="mission.htm" class="btn_1">看更多</a>
-                        </span>
-                        <span>
-                            <small>刊登截止日 2021/03/16</small>
-                            <a href="#" class="btn_2">我有興趣</a>
-                        </span>
-                    </div>
-                </li>
-                <li class="card mission recommend">
-                    <div class="cover">
-                        <img src="/src/images/demo.jpg" alt="">
-                    </div>
-                    <div class="item">
-                        <i class="fas fa-clock"></i>
-                        <span>2021/01/01~2021/12/24</span>
-                    </div>
-                    <h5>金針葉原料通路合作機會（限銷售台灣、中國大陸以外地區）</h5>
-                    <div class="item bg">
-                        <i class="fas fa-comment-dots"></i>
-                        <p>提供能幫助入睡、舒緩情緒的高質量金針葉原料。金針葉除了可以製作成養生茶，還可以用於製作各式各樣的養生食品。其中最常見的加工......</p>
-                    </div>
-                    <div class="item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div class="label">
-                            <span >台灣</span><span >日本</span>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <i class="fas fa-cog"></i>
-                        <div class="label">
-                            <span >製造</span>
-                        </div>
-                    </div>
-                    <div class="operate">
-                        <span>
-                            <a href="mission.htm" class="btn_1">看更多</a>
-                        </span>
-                        <span>
-                            <small>刊登截止日 2021/03/16</small>
-                            <a href="#" class="btn_2">我有興趣</a>
-                        </span>
-                    </div>
-                </li>
-                <li class="card mission expired">
-                    <div class="cover">
-                        <img src="/src/images/demo.jpg" alt="">
-                    </div>
-                    <div class="item">
-                        <i class="fas fa-clock"></i>
-                        <span>2021/01/01~2021/12/24</span>
-                    </div>
-                    <h5>金針葉原料通路合作機會（限銷售台灣、中國大陸以外地區）</h5>
-                    <div class="item bg">
-                        <i class="fas fa-comment-dots"></i>
-                        <p>提供能幫助入睡、舒緩情緒的高質量金針葉原料。金針葉除了可以製作成養生茶，還可以用於製作各式各樣的養生食品。其中最常見的加工......</p>
-                    </div>
-                    <div class="item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div class="label">
-                            <span >台灣</span><span >日本</span>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <i class="fas fa-cog"></i>
-                        <div class="label">
-                            <span >製造</span>
-                        </div>
-                    </div>
-                   
-                </li>
-                <li class="card mission recommend expired">
-                    <div class="cover">
-                        <img src="/src/images/demo.jpg" alt="">
-                    </div>
-                    <div class="item">
-                        <i class="fas fa-clock"></i>
-                        <span>2021/01/01~2021/12/24</span>
-                    </div>
-                    <h5>金針葉原料通路合作機會（限銷售台灣、中國大陸以外地區）</h5>
-                    <div class="item bg">
-                        <i class="fas fa-comment-dots"></i>
-                        <p>提供能幫助入睡、舒緩情緒的高質量金針葉原料。金針葉除了可以製作成養生茶，還可以用於製作各式各樣的養生食品。其中最常見的加工......</p>
-                    </div>
-                    <div class="item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div class="label">
-                            <span>台灣</span><span >日本</span>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <i class="fas fa-cog"></i>
-                        <div class="label">
-                            <span>製造</span>
-                        </div>
-                    </div>
-                   
-                </li>
-            </ul>
 
+            <div id="app">
+                <ul class="card_list_2">
+                    <li class="card mission" v-for="(item,index) in list" 
+                        :key="item.id"  
+                        :data-id="item.id" 
+                        :class="{'recommend':item.recommend == 1,'expired': date > new Date(item.publish_end_date) }" >
+                        
+                        <div>
+                            <div class="cover">
+                                <img :src="'/src/images/cover/'+item.cover" alt="">
+                            </div>
+                            <div class="item">
+                                <i class="fas fa-clock"></i>
+                                <span>{{item.subject_start_date}}~{{item.subject_end_date}}</span>
+                            </div>
+                            <h5>{{item.subject}}</h5>
+                            <div class="item bg">
+                                <i class="fas fa-comment-dots"></i>
+                                <p>{{item.subject_intro}}</p>
+                            </div>
+                            <div class="item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div class="label">
+                                    <span v-for="item in location">{{item}}</span>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <i class="fas fa-cog"></i>
+                                <div class="label">
+                                    <span>{{item.industries}}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="operate">
+                            <span>
+                                <a :href="'/mission/'+item.id+'.htm'" class="btn_1">看更多</a>
+                            </span>
+                            <span>
+                                <small>刊登截止日 {{item.publish_end_date}}</small>
+                                <a class="btn_2" href="https://forms.gle/CQGu1ahdt4jgZMDr5" target="_blank">我有興趣</a>
+                            </span>
+                        </div>
+                    </li>
+                </ul>
+                {{expired}}
+            </div>
+           
+            
         </div>
         <div class="footer">
             <p>© 2021 CiRCLELiNKS 智合圈</p>
@@ -178,16 +98,50 @@
     </div>
 
     <script src="dist/bundle.js"></script>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-        $(function(){
-          $('.side_open').on('click',function(){
-              $('.side').addClass('active')
-          });
-          $('.side_clode').on('click',function(){
-               $('.side').removeClass('active')
-          });
-       });
-   </script>
+        const app = new Vue({
+            el: '#app',
+            data:{
+                list:[],
+                date:new Date()
+            },
+            computed:{
+                location(){
+                    let vm = this;
+                    for( var i=0; i<vm.list.length; i++){
+                        let singleLocation = vm.list[i].locations.split(',');
+                        return singleLocation
+                    }
+                },
+                expired(){
+                    let vm = this;
+                    let nowTime = new Date();
+                    let endDate = '';
+                    
+                    for( var i=0;i<vm.list.length; i++ ){
+                        endDate = new Date( vm.list[i].publish_end_date ) ;
+                    }
+                }
+            },
+            mounted : function(){
+                console.log(this.list);  
+            },
+            created(){
+                let vm = this;
+                axios.get('./src/js/data.json').then((response)=>{
+                    console.log(response.data);
+                    vm.list=response.data;
+                }).catch((response) => {
+                    /* 失敗，發生錯誤*/
+                    console.log(response)
+                });;
+            }
+        });
+  
+    </script>
    
 </body>
 
