@@ -1,0 +1,38 @@
+stages:
+  - test
+#  - build
+#  - deploy
+
+test:
+ stage: test
+ script: 
+  - echo "Building Beta Server" 
+  - rsync -ap . ~/wwwroot/${CI_PROJECT_NAME}
+  - echo "Rsyncing ~/wwwroot/${CI_PROJECT_NAME}/ to remote beta server"
+  - rsync -ap  --no-links --exclude '/.git' --exclude '/webpack.config.js' --exclude '/package.*'  ${CI_PROJECT_DIR}/ git@210.61.165.239:/var/www/vhosts/needs.circlelinks.net/
+ only:
+  - beta
+
+#build:
+#  stage: build
+#  script: echo "Building the app"
+
+# deploy_staging:
+#   stage: deploy
+#   script:
+#     - echo "Deploying Production server TW-WEB-1 environment"
+#     - echo ${CI_PROJECT_DIR}
+#     - cp .env.production .env
+#     - rsync -ap --no-links --exclude '/.git' --exclude '/vendor' --exclude '/bootstrap/cache/*' --exclude '/public/upload' ${CI_PROJECT_DIR}/ git@35.201.173.238:/var/www/vhosts/soic.org.tw/
+#     - echo "Rsync Done"
+#     - echo "Publishing to Production server HK-WEB-1 35.241.93.134"
+#     - rsync -ap --no-links --exclude '/.git' --exclude '/vendor' --exclude '/bootstrap/cache/*' --exclude '/public/upload' ${CI_PROJECT_DIR}/ git@35.241.93.134:/var/www/vhosts/soic.org.tw/
+#     - echo "Done."
+#   environment:
+#     name: production
+#     url: https://soic.circles.tw
+#   only:
+#     - master
+
+variables:
+  GIT_SSL_NO_VERIFY: "true"
