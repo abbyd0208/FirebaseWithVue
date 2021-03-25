@@ -87,7 +87,8 @@
                             <hr>
                             <div class="operate">
                                 <span>
-                                    <a href="#" class="btn_1">複製連結&分享</a>
+                                    <!-- <input class="copyUrl" type="text" :value="url"> -->
+                                    <a href="#" class="btn_1" @click.prevent="copyLink">複製連結&分享</a>
                                 </span>
                                 <span>
                                     <small>刊登截止日 {{page.publish_end_date}}</small>
@@ -128,13 +129,24 @@
     <!-- vue、axios -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  
     <script>
         const app = new Vue({
             el:'#app',
             data:{
                 page:{},
                 date:new Date(),
-                expired:false
+                url:window.location.href,
+            },
+            methods:{
+                copyLink(){
+                    let vm = this;
+                    var temp = $('<input>'); // 建立input物件
+                    $('body').append(temp); // 將input物件增加到body
+                    temp.val( vm.url).select(); // 將連結加到input物件value
+                    document.execCommand('copy'); // 複製
+                    temp.remove(); // 移除input物件
+                }
             },
             computed:{
                locations(){

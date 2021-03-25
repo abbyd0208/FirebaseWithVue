@@ -195,7 +195,6 @@
         h4{ font-weight: 500; margin-bottom: 8px;}
     }
     .fa-clock,.fa-comment-dots,.fa-map-marker-alt,.fa-briefcase,.fa-cog{font-size: 18px; color: $blue;  margin-right: 10px; width: 24px; }
-    
 }
 
 
@@ -205,9 +204,9 @@
         width: 30%; padding: 12px; border-radius: 3px; overflow: hidden; position: relative;
         box-shadow: 0px 0px 10px rgba(0,0,0,0.1);  margin-bottom: 30px;
         display: flex; flex-direction: column; justify-content: space-between;
-        .cover{ height: 180px; width: 150%; margin-bottom: -40px; overflow: hidden;
-            transform: skew(-10deg, -10deg) translateX(-60px) translateY(-100px); 
-            img{ width: 100%;  transform: skew(10deg, 10deg) translateX(-50px);}
+        .cover{ height: 180px; width: 130%; margin-bottom: -40px; overflow: hidden;
+            transform: skew(-10deg, -10deg) translateX(-15%) translateY(-100px); 
+            img{ width: 100%;  transform: skew(10deg, 10deg);}
         }
         .item{
             p{ display: -webkit-box;
