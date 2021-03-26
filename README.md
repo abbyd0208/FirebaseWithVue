@@ -1,3 +1,3 @@
-# www.circlelinks.net
+# needs.circlelinks.net
 
-CiRCLELiNKS Portal型態主站
+CiRCLELiNKS Portal 子站：任務旋轉門
