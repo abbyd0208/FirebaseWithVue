@@ -183,7 +183,12 @@
 
 .mission{
     h2.title{  @include text(21px,300,$black,0px); margin-bottom: 20px; }
-    h5{  @include text(21px,300,$black,0px); margin-bottom: 10px;}
+    h5{  @include text(21px,300,$black,0px); margin-bottom: 10px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2; //行數
+        -webkit-box-orient: vertical;
+        white-space: normal;
+        overflow: hidden;}
     .item{ display: flex; align-items: center; margin-bottom: 15px; 
         &.bg{ line-height: 1.8; background: $greenLiter; padding: 10px; border-radius: 5px; align-items: flex-start;
             letter-spacing: 1px; font-weight: 300;
@@ -194,6 +199,7 @@
         }
         h4{ font-weight: 500; margin-bottom: 8px;}
     }
+    .fa-comment-dots{ margin-left: -5px;;}
     .fa-clock,.fa-comment-dots,.fa-map-marker-alt,.fa-briefcase,.fa-cog{font-size: 18px; color: $blue;  margin-right: 10px; width: 24px; }
 }
 
@@ -206,9 +212,7 @@
         display: flex; flex-direction: column; justify-content: space-between;
         .cover{ 
             height: 180px; width: 130%; margin-bottom: -40px; overflow: hidden;
-
             transform: skew(-10deg, -10deg) translateX(-15%) translateY(-100px); 
-            
             img{ width: 100%;  transform: skew(10deg, 10deg);}
         }
         .item{

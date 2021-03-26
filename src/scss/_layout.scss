@@ -2,7 +2,7 @@ body.mission{
     background: url(../images/mission_deco.png) no-repeat left bottom / 65%;
 }
 
-.wrapper{ overflow: hidden; perspective:800px;}
+.wrapper{ overflow: hidden; }
 
 .header{
     border-top: 4px solid $greenLight;
@@ -63,12 +63,13 @@ body.mission{
     position: fixed;
     right: 0;
     top: 0;
-    z-index: 1;
-    transform: perspective(2000px) rotateY(270deg); 
+    z-index: 110;
+    transform: perspective(300px) rotateY(270deg) translateZ(0px); 
     background: $greenLight;
     transform-origin: right;
     transition: transform .8s;
     visibility: hidden;
+    overflow: hidden;
     .inner{
         display: flex;
             flex-direction: column;
@@ -85,7 +86,7 @@ body.mission{
     }
     &.active{
         visibility: visible;
-        transform: perspective(2000px) rotateY(360deg); 
+        transform: perspective(300px) rotateY(360deg) translateZ(10px); 
     }
     
 }
