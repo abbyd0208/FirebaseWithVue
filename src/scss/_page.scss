@@ -329,6 +329,9 @@
 
 // 任務列表
 .subject_content.missions{
+    p.note{ display: inline-block; padding: 2px 4px; background: linear-gradient(to right, rgba(255,214,0,0.3) 0%,rgba(255,255,255,1) 100%); margin-bottom: 20px;  
+        &::before{ display: inline-block; content: ''; width: 18px; height: 18px;vertical-align: -1px; margin-right: 5px; background: url(../images/Star.png) no-repeat center center / contain; }
+    }
    
 }
 
