@@ -11,7 +11,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.1.0/js/solid.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.1.0/js/brands.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.1.0/js/fontawesome.js"></script>
-
+    <script src="dist/bundle.js"></script>
+    <!-- vue、axios -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 </head>
 
@@ -37,13 +40,13 @@
             </div>
         </div>
         <div id="app">
-            <div class="container " >
+            <div class="container"  v-if="page" >
                 <div class="subject_title">
                     <img src="./src/images/subject_title_img.png" alt="">
                     <h2>任務旋轉門</h2>
                     <p>發掘解決方案和潛在夥伴</p>
                 </div>
-                <div class="subject_content mission" :class="{'recommend':page.recommend == 1, 'expired':  date > new Date(page.publish_end_date)}">
+                <div class="subject_content mission":class="{'recommend':page.recommend == 1, 'expired':  date > new Date(page.publish_end_date)}">
                     <div class="row">
                         <div class="col-12">
                             <div class="breadcrumb"><a href="missions.htm">任務旋轉門</a><span>{{page.subject}}</span></div>
@@ -125,10 +128,7 @@
         </div>
     </div>
 
-    <script src="dist/bundle.js"></script>
-    <!-- vue、axios -->
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    
   
     <script>
         const app = new Vue({

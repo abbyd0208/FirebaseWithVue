@@ -11,7 +11,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.1.0/js/brands.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.1.0/js/fontawesome.js"></script>
 
-
+    <script src="dist/bundle.js"></script>
+    <!-- vue、axios -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body class="mission">
     <div class="side">
@@ -41,7 +44,7 @@
                 <p>發掘解決方案和潛在夥伴</p>
             </div>
             
-            <div class="subject_content missions">
+            <div class="subject_content missions" v-if="list">
                 <h4 class="unit_title">任務</h4>
                 <p class="note">此標記為CiRCLELiNKS會員所發布的任務。歡迎踴躍回應！</p>
                 <div id="app">
@@ -98,10 +101,7 @@
         </div>
     </div>
 
-    <script src="dist/bundle.js"></script>
-   <!-- vue、axios -->
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  
     <script>
         const app = new Vue({
             el: '#app',
