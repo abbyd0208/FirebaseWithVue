@@ -9,7 +9,7 @@ test:
   - echo "Building Beta Server" 
   - rsync -ap . ~/wwwroot/${CI_PROJECT_NAME}
   - echo "Rsyncing ~/wwwroot/${CI_PROJECT_NAME}/ to remote beta server"
-  - rsync -ap  --no-links --exclude '/.git' --exclude '/webpack.config.js' --exclude '/package.*'  ${CI_PROJECT_DIR}/ git@210.61.165.239:/var/www/vhosts/needs.circlelinks.net/
+  - rsync -ap  --no-links --exclude '/.git' --exclude '/webpack.config.js' --exclude '/package.*'  ${CI_PROJECT_DIR}/ git@210.61.165.235:/var/www/vhosts/needs.circlelinks.net/
  only:
   - beta
 
