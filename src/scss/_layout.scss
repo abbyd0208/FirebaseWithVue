@@ -19,11 +19,15 @@ body.mission{
         a{ display: inline-block; width: 150px; height: 33px; text-indent: -300%; overflow: hidden; }
     }
     .menu{
-
         a{  display:inline-block; margin-right:30px; 
             // $size,$weight:300,$color,$spacing
-            @include text(16px,400,$black,2px);}
-            
+            @include text(16px,400,$black,2px);
+            position: relative;
+        }
+        .active{ 
+            //  &::after{ display: block; width: 12px; height: 4px; content: ''; position: absolute; left: 50%; bottom: -10px; transform: translateX(-50%); background: $greenLight;}   
+            color: $greenDark;
+        }    
     }
 
     .side_open{ display: none; cursor: pointer;
