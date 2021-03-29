@@ -75,7 +75,7 @@
                                 <div class="item">
                                     <i class="fas fa-map-marker-alt"></i>
                                     <div class="label">
-                                        <span v-for="item in location">{{item}}</span>
+                                        <span v-for="(item, index) in location[index]">{{item}}</span>
                                     </div>
                                 </div>
                                 <div class="item">
@@ -117,11 +117,13 @@
             computed:{
                 location(){
                     let vm = this;
+                    let singleLocation =[]
                     for( var i=0; i<vm.list.length; i++){
-                        let singleLocation = vm.list[i].locations.split(',');
-                        return singleLocation
+                        singleLocation.push(vm.list[i].locations.split(','))
                     }
+                    return singleLocation
                 }
+
                 
             },
             mounted : function(){
