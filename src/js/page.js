@@ -23,19 +23,13 @@ $(function () {
 
     $(window).on('scroll',function(){
         iWinScroll = $(this).scrollTop();
-
-        console.log(iWinScroll)
         if(timer){clearTimeout(timer)}
-        
-
         timer = setTimeout(function(){
             if(iWinScroll >   iScrollPointB) {
-            
                 $totop.css({"opacity":"1", "bottom":"40px"});
             }else{
                 $totop.css({"opacity":"0", "bottom":"0px"});
             };
-
         },500);
     });
 
