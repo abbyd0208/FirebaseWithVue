@@ -181,27 +181,30 @@
     }
 }
 
-
+// 列表
 .mission{
     h2.title{  @include text(21px,300,$black,0px); margin-bottom: 20px; }
-    h5{  @include text(21px,300,$black,0px); margin-bottom: 10px;
+    .subject{  @include text(21px,300,$black,0px); margin-bottom: 10px;
         display: -webkit-box;
         -webkit-line-clamp: 2; //行數
         -webkit-box-orient: vertical;
         white-space: normal;
         overflow: hidden;}
+    h5{ @include text(21px,300,$black,0px); margin-bottom: 5px; }
     .item{ display: flex; align-items: center; margin-bottom: 15px; 
         &.bg{ line-height: 1.8; background: $greenLiter; padding: 10px; border-radius: 5px; align-items: flex-start;
-            letter-spacing: 1px; font-weight: 300;
+            letter-spacing: 1px; font-weight: 300; margin-left: -5px;
         }
         &.company{
             align-items: flex-start;
             line-height: 1.8; letter-spacing: 1px; font-weight: 300;
+            h5{ margin-top: -8px;}
         }
         h4{ font-weight: 500; margin-bottom: 8px;}
     }
-    .fa-comment-dots{ margin-left: -5px;;}
-    .fa-clock,.fa-comment-dots,.fa-map-marker-alt,.fa-briefcase,.fa-cog{font-size: 18px; color: $blue;  margin-right: 10px; width: 24px; }
+    .fa-comment-dots{ margin-left: -5px;}
+    .fa-briefcase{}
+    .fa-clock,.fa-comment-dots,.fa-map-marker-alt,.fa-briefcase,.fa-cog{font-size: 18px; color: $blue;  margin-right: 10px; width: 18px; }
 }
 
 
