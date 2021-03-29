@@ -300,18 +300,21 @@
     }
     
     // 過期
-    &.expired{ 
+    &.expired{  
+    
         hr{ display: none;}
         .mission_content{ display: none;}
         .operate{ display: none;}
         .expired_block{
             width: 100%;
-            height: 100%;
             display: flex;
             flex-direction: column;
+            flex-wrap: wrap;
             .content{
-                display: flex; text-align: center; margin-bottom: 50px;
-                img{ width: 175px; margin-right: -50px;}
+                div:nth-of-type(1){ width: 30%; margin-right: -20%;}
+                div:nth-of-type(2){ width: 70%;}
+                display: flex; flex-wrap: wrap; text-align: center; margin-bottom: 50px; justify-content: center;
+                
                 h2{
                     // $size,$weight:300,$color,$spacing
                     @include text(28px,900,$blue,5px)
@@ -325,6 +328,20 @@
         .ad_block{display: block; width: 80%;} 
         @include media-breakpoint-down(md){
             .ad_block{width: 100%;} 
+            .expired_block .content{
+                div:nth-of-type(1){ width: 35%; margin-right: -10%;}
+                div:nth-of-type(2){ width: 65%;}
+               
+            }
+        }
+
+        @include media-breakpoint-down(sm){
+           
+            .expired_block .content h2{
+                // $size,$weight:300,$color,$spacing
+                @include text(21px,900,$blue,3px)
+            }
+            // .expired_block .content  img{ width: 140px; }
         }
     }
     
