@@ -94,7 +94,7 @@
                             <hr>
                             <div class="operate">
                                 <span>
-                                    <!-- <input class="copyUrl" type="text" :value="url"> -->
+                                    <small class="isCopied" v-if="copy == true">連結已複製!</small>
                                     <a href="#" class="btn_1" @click.prevent="copyLink">複製連結&分享</a>
                                 </span>
                                 <span>
@@ -143,6 +143,7 @@
                 page:{},
                 date:new Date(),
                 url:window.location.href,
+                copy:false
             },
             methods:{
                 copyLink(){
@@ -151,7 +152,11 @@
                     $('body').append(temp); // 將input物件增加到body
                     temp.val( vm.url).select(); // 將連結加到input物件value
                     document.execCommand('copy'); // 複製
+                    vm.copy = true;
                     temp.remove(); // 移除input物件
+                    setTimeout(()=>{
+                        vm.copy = false;
+                    },1000)
                 }
             },
             computed:{
