@@ -1,11 +1,12 @@
 // 介紹頁
 .visual{
-    overflow:hidden;
-    background-image: linear-gradient(135deg, rgba(255,214,0,0.2) 0%,rgba(255,255,255,0) 20%), 
-                    linear-gradient(135deg, rgba(255,255,255,0.15) 80%,rgba(77,198,201,0.4) 100%); 
+    
+    background-image: linear-gradient(135deg, rgba(255,214,0,0.2) 0%,rgba(255,255,255,0) 30%), 
+                    linear-gradient(135deg, rgba(255,255,255,0.15) 70%,rgba(77,198,201,0.4) 100%); 
     background-position: left top, right bottom;
+    background-size: 110% 120% , 110% 150%;
     position: relative; padding: 100px 0;
-    margin-top: -30px; margin-bottom: 100px;
+    margin-top: -30px; margin-bottom: 0px;
     @include media-breakpoint-down(sm){
         margin-bottom: 50px;
     }
@@ -125,50 +126,41 @@
 
     // 旋轉門介紹
     &.intro{
+       
         position: relative; 
-        &::before{ display: block; width: 110%; height: 150px; content: '';  background: linear-gradient(to bottom, rgb(227, 247, 247) 0%,rgb(255,255,255) 100%); position: absolute; left: -5%; top: -18%;  transform: rotateZ(-3deg); }
+        &::before{ display: block; width: 110%; height: 80px; content: '';  background: linear-gradient(to bottom, rgb(227, 247, 247) 0%,rgb(255,255,255) 100%); position: absolute; left: 0%; top: 0%; transform: rotateZ(-4deg); }
         margin-bottom: 100px; 
-        background: url(../images/intro.png) no-repeat 120px bottom/ 40%;
+        background: url(../images/intro.png) no-repeat 120px bottom/ 35%;
         p{ margin-bottom: 30px; line-height: 1.8;}
         .btn_center{ margin-top: 50px;}
 
         @keyframes doorShadow1{
-            0%{transform: translateX(-48%) translateY(50px) rotateY(360deg); opacity: 0;}
-            100%{ transform: translateX(-48%) translateY(0) rotateY(333deg); opacity: 1;}
+            0%{transform: translateY(50px) rotateY(360deg); opacity: 0;}
+            100%{ transform:  translateY(0) rotateY(333deg); opacity: 1;}
         }
 
         @keyframes doorShadow2{
-            0%{transform: translateX(-40%) translateY(50px) rotateY(180deg); opacity: 0;}
-            100%{transform: translateX(-40%) translateY(0px) rotateY(220deg); opacity: 1;}
+            0%{transform:  translateY(50px) rotateY(180deg); opacity: 0;}
+            100%{ transform: translateY(0px) rotateY(210deg); opacity: 1;}
         }
 
-        .door_shadow{ width: 17vw; height: 24vw;  position: absolute; left: 50%; top: -80px;  z-index: 2;  
+        .door_shadow{ width: 17vw; height: 24vw;  position: absolute; left: 50%; transform: translateX(-50%); top:12%;  z-index: 2;  
             perspective:600px;
             .shadow_1,.shadow_2{width: 17vw; height: 24vw; }
 
             .shadow_1{
-                
-              
                 background: linear-gradient(3deg, rgba(255, 255, 255, 0) 80%, rgba(77, 198, 201, 0.2) 100%);
                 filter: blur(5px);
-                // border: 1px solid red;
                 position: absolute; left: 0; top: 0;
                 animation: doorShadow1 3s both;
                 
             }
             .shadow_2{ 
-               
-                // transform: translateX(-45%) translateY(-0px) rotateY(187deg);
                 background: linear-gradient(4deg, rgba(255, 255, 255, 0) 80%, rgba(77, 198, 201, 0.2) 100%);
                 filter: blur(5px);
-                // border: 1px solid green;
                 position: absolute; left: 0; top: 0;
                 animation: doorShadow2 3s both;
             }
-        }
-
-        @include media-breakpoint-down(md){
-            // padding: 200px 0;
         }
 
         @include media-breakpoint-down(sm){
@@ -176,7 +168,7 @@
             background-position:-50px 100%;
             background-size: contain;
             margin-bottom: 30px;
-
+            background: none;
             .door_shadow{
                 width: 45vw; height: 60vw; top:0px;
                 .shadow_1,.shadow_2{  width: 45vw; height: 60vw;}

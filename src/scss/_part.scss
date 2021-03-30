@@ -137,8 +137,8 @@
 .unit_title{ 
     text-align: center; margin: 30px auto;
     // $size,$weight:300,$color,$spacing
-    @include text(21px,400,$blue,5px);
-    &::before{ display: inline-block; content: ''; width: 22px; height: 23px; background: url(../images/sparks.png) no-repeat; background-size: contain; margin-bottom: 20px; margin-right: -10px;}
+    @include text(24px,400,$blue,8px);
+    &::before{ display: inline-block; content: ''; width: 30px; height: 30px; background: url(../images/sparks.png) no-repeat left bottom; background-size: contain; margin-bottom: 10px; margin-right: -4px;}
 }
 
 // mixin 焦點卡片狀態
