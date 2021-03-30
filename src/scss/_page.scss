@@ -125,8 +125,8 @@
 
     // 旋轉門介紹
     &.intro{
-        position: relative;
-        &::before{ display: block; width: 110%; height: 150px; content: '';  background: linear-gradient(to bottom, rgb(227, 247, 247) 0%,rgb(255,255,255) 100%); position: absolute; left: -5%; top: -18%; z-index: 1; transform: rotateZ(-3deg); }
+        position: relative; 
+        &::before{ display: block; width: 110%; height: 150px; content: '';  background: linear-gradient(to bottom, rgb(227, 247, 247) 0%,rgb(255,255,255) 100%); position: absolute; left: -5%; top: -18%;  transform: rotateZ(-3deg); }
         margin-bottom: 100px; 
         background: url(../images/intro.png) no-repeat 120px bottom/ 40%;
         p{ margin-bottom: 30px; line-height: 1.8;}
@@ -134,20 +134,21 @@
 
         @keyframes doorShadow1{
             0%{transform: translateX(-48%) translateY(50px) rotateY(360deg); opacity: 0;}
-            100%{ transform: translateX(-48%) translateY(0) rotateY(354deg); opacity: 1;}
+            100%{ transform: translateX(-48%) translateY(0) rotateY(333deg); opacity: 1;}
         }
 
         @keyframes doorShadow2{
-            0%{transform: translateX(-45%) translateY(50px) rotateY(180deg); opacity: 0;}
-            100%{transform: translateX(-45%) translateY(0px) rotateY(187deg); opacity: 1;}
+            0%{transform: translateX(-40%) translateY(50px) rotateY(180deg); opacity: 0;}
+            100%{transform: translateX(-40%) translateY(0px) rotateY(220deg); opacity: 1;}
         }
 
-        .door_shadow{ width: 17vw; height: 24vw;  position: absolute; left: 50%; top: -80px;  z-index: 2; 
+        .door_shadow{ width: 17vw; height: 24vw;  position: absolute; left: 50%; top: -80px;  z-index: 2;  
+            perspective:600px;
             .shadow_1,.shadow_2{width: 17vw; height: 24vw; }
 
             .shadow_1{
                 
-                // transform: translateX(-48%) translateY(0) rotateY(354deg);
+              
                 background: linear-gradient(3deg, rgba(255, 255, 255, 0) 80%, rgba(77, 198, 201, 0.2) 100%);
                 filter: blur(5px);
                 // border: 1px solid red;
