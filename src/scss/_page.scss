@@ -189,7 +189,7 @@
         background: $blue; 
 
         &::before{ content: ''; display: block; width: 110%;  height: 110px; position: absolute; left: -10%; top: -48px;
-            transform: rotateZ(3deg); background: $blue;z-index: 1;
+            transform: rotateZ(3deg); background: $blue;;
         }
         &::after{ content: ''; display: block; width: 110%;  height: 110px; position: absolute; left: -10%; bottom: -48px;
             transform: rotateZ(-3deg); background: $blue; z-index: -1;
