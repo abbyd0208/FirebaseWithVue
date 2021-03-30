@@ -81,7 +81,7 @@ body.mission{
             }
     }
     .side_clode{
-        width: 40px; height: 40px; position: absolute; right: 15px; top: 15px;   cursor: pointer; text-align:center ;
+        width: 40px; height: 40px;display: flex; justify-content: center; align-items: center; position: absolute; right: 15px; top: 15px; cursor: pointer; text-align:center ;
         .fa-times{ color: #fff; font-size: 24px;}
     }
     &.active{
