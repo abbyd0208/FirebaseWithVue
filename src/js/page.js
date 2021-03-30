@@ -9,7 +9,7 @@ $(function () {
         $('.side').removeClass('active')
     });
 
-    var applyHtml = `<a class="apply_btn" href="https://forms.gle/vNLRHH1pHpdv9iS77" target="_blank">馬上<br class="d-sm-none">申請 <i class="fas fa-arrow-alt-circle-right"></i><a>`;
+    var applyHtml = `<a class="apply_btn" href="https://forms.gle/vNLRHH1pHpdv9iS77" target="_blank">馬上<br class="d-md-none">申請 <i class="fas fa-arrow-alt-circle-right"></i><a>`;
     $('body').append(applyHtml);
 
     var gototopHtml = `<div class="gototop"><i class="fas fa-chevron-up"></i></div>`;
@@ -18,7 +18,7 @@ $(function () {
     var iScrollPointA = 0;  //滾回的位置
     var iScrollPointB = 200; //滾到的位置 出現gototop
     var timer = '', iWinScroll='';
-    var $totop = $('.gototop');
+    var $totop = $('.gototop'),$apply = $('.apply_btn');
 
 
     $(window).on('scroll',function(){
@@ -27,8 +27,10 @@ $(function () {
         timer = setTimeout(function(){
             if(iWinScroll >   iScrollPointB) {
                 $totop.css({"opacity":"1", "bottom":"40px"});
+                $apply.css({ "bottom":"95px"})
             }else{
                 $totop.css({"opacity":"0", "bottom":"0px"});
+                $apply.css({ "bottom":"40px"})
             };
         },500);
     });

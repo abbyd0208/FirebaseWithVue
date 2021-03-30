@@ -93,7 +93,7 @@ body.mission{
 
 .apply_btn{ width: 48px; height: 160px; line-height: 48px; 
     text-align: center; background: $blue; color: $white; position: fixed; right: 0; top: 300px; -webkit-writing-mode: vertical-lr;
-    writing-mode: vertical-lr;  transition: .3s;
+    writing-mode: vertical-lr; 
     @include text(16px,300,$white,10px);
     box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
     .fa-arrow-alt-circle-right{ display: inline-block; font-size: 24px; margin-left: 5px; margin-top: -10px;}
@@ -110,7 +110,8 @@ body.mission{
         justify-content: center;
         align-items: center;
         -webkit-writing-mode: unset;  width: 48px; height: 48px; border-radius: 50%; line-height: 1.6; overflow: hidden;
-        font-size: 13px; letter-spacing: 0px; vertical-align: middle; top:auto; bottom: 95px; right: 10px;
+        font-size: 13px; letter-spacing: 0px; vertical-align: middle; top:auto; bottom: 40px; right: 10px;
+        transition: .3s;  transition-delay: .2s;
         .fa-arrow-alt-circle-right{ display: none;}
         &::after{ display: none;}
         box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
