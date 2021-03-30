@@ -86,7 +86,7 @@ body.mission{
     }
     &.active{
         visibility: visible;
-        transform: perspective(300px) rotateY(360deg) translateZ(10px); 
+        transform: perspective(300px) rotateY(360deg) translateZ(2px); 
     }
     
 }
