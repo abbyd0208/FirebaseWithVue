@@ -12,24 +12,27 @@
     }
 
     .doors{ 
-        width: 17vw; height: 24vw;  margin: 0 auto; position: relative; 
+        width: 17vw; height: 24vw;  margin: 0 auto; position: relative;  perspective:600px;
         .door1,.door2{ width: 17vw; height: 24vw; position: absolute; left: 0; top: 0; overflow:hidden; }
-        .door1{ animation: door1 3s both;   border: 1px solid $blue;
-            
+        .door1{ animation: door1 3s both; 
+           .line{ width: 90%; height: 90%;  border: 2px solid #fff ; margin: 5%; position: relative; z-index: 1;}
             &::before{ content: ''; display: block; width: 50%; height: 100%; position: absolute; left: 0; top: 0;
-                background: linear-gradient(9.54deg, rgba(98, 251, 255, 0.19) 15.47%, #4DB3C9 72.68%);}
+                background: linear-gradient(9.54deg, rgba(98, 251, 255, 0.19) 15.47%, #4DB3C9 72.68%);
+
+            }
             &::after{content: ''; display: block; width: 50%; height: 100%; position: absolute; right: 0; top: 0; 
-                background: linear-gradient(263.12deg,  rgba(98, 251, 255, 0.19) 13.12%, #4DC6C9  128.76%);
+                background:linear-gradient(263.12deg, rgba(98, 251, 255, 0.4)20%, #4DC6C9 100%)
             }
         }
-        .door2{ animation:door2 3s both ;  border: 1px solid $greenLight ;
-
+        .door2{ 
+            animation:door2 3s both ; 
+            .line{ width: 90%; height: 90%;  border: 2px solid  $blueLighter ;margin: 5%; position: relative; z-index: 1;}
             &::before{ content: ''; display: block; width: 50%; height: 100%; position: absolute; left: 0; top: 0; 
-                background: linear-gradient(3.77deg, rgba(77, 156, 201, 0.34) -5.2%, rgba(98, 251, 255, 0.19) 84.39%); padding: 20px;
+                background: linear-gradient(3.77deg, rgba(77, 156, 201, 0.7) 10%, rgba(133, 251, 255, 0.3) 100%); 
             }
               
-            &::after{content: ''; display: block; width: 50%; height: 100%; position: absolute; right: 0; top: 0; 
-                background: linear-gradient(38.96deg, rgba(77, 198, 201, 0.42) 48.9%, rgba(98, 251, 255, 0.19) 115.25%);
+            &::after{content: ''; display: block; width: 50%; height: 100%; position: absolute; right: 0; top: 0;  z-index: 2;
+                background: linear-gradient(38.96deg, rgba(77, 198, 201, 0.42) 48.9%, rgba(98, 251, 255, 0.19) 100%);
             }
         } 
 
@@ -40,13 +43,13 @@
     }
 
     @keyframes door1 {
-        0%{ transform: perspective(600px)  rotateY(0deg) translateY(-100px); opacity: 0; }
-        100%{ transform: perspective(600px)  rotateY(-30deg) translateY(0px); opacity: 1;}
+        0%{ transform: rotateY(0deg)  translateY(-100px); opacity: 0; }
+        100%{ transform:  rotateY(-30deg) translateY(0px); opacity: 1;}
     }
 
     @keyframes door2 {
-        0%{ transform: perspective(600px)  rotateY(0deg) translateY(-100px); opacity: 0;}
-        100%{ transform:perspective(600px)   rotateY(30deg) translateY(0px); opacity: 1;}
+        0%{ transform:  rotateY(0deg) translateY(-100px); opacity: 0;}
+        100%{ transform: rotateY(30deg) translateY(0px); opacity: 1;}
     }
 
     .decobox{
