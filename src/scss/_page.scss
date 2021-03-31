@@ -125,17 +125,20 @@
 // 關於旋轉門
 .secction{
         padding:  10vw 30px;
-    .content{
-        &.center{ text-align: center;}
-    }
+   
     .inner{max-width: 1280px; margin: 0 auto; }
     // 旋轉門介紹
     &.intro{
+        text-align: center;
         position: relative; margin-bottom: 100px;  background: url(../images/intro.png) no-repeat 120px bottom/ 35%;
         // 斜角
-        &::before{ display: block; width: 110%; height: 80px; content: '';  background: linear-gradient(to bottom, rgb(227, 247, 247) 0%,rgb(255,255,255) 100%); position: absolute; left: 0%; top: 0%; transform: rotateZ(-4deg); }
-        p{ margin-bottom: 30px; line-height: 1.8;}
-        .btn_center{ margin-top: 50px;}
+        &::before{ display: block; width: 110%; height: 100px; content: '';  background: linear-gradient(to bottom, rgb(227, 247, 247) 0%,rgb(255,255,255) 100%); position: absolute; left: 0%; top: 0%; transform: rotateZ(-4deg); }
+        .content{
+            padding-top: 5VW;
+            p{ margin-bottom: 30px; line-height: 1.8;}
+            .btn_center{ margin-top: 50px;}
+        }
+       
 
         @keyframes doorShadow1{
             0%{transform:translateX(-60%) translateY(50px) rotateY(360deg); opacity: 0;}
@@ -153,7 +156,7 @@
             .shadow_1,.shadow_2{width: 18vw; height: 24vw; }
 
             .shadow_1{
-                background: linear-gradient(3deg, rgba(255, 255, 255, 0) 80%, rgba(77, 198, 201, 0.2) 100%);
+                background: linear-gradient(3deg, rgba(255, 255, 255, 0) 80%, rgba(81, 162, 228, 0.2) 100%);
                 filter: blur(5px);
                 position: absolute; left: 50%; top: 0;
                 animation: doorShadow1 3s both;

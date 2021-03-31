@@ -139,6 +139,10 @@
     // $size,$weight:300,$color,$spacing
     @include text(24px,400,$blue,8px);
     &::before{ display: inline-block; content: ''; width: 30px; height: 30px; background: url(../images/sparks.png) no-repeat left bottom; background-size: contain; margin-bottom: 10px; margin-right: -4px;}
+
+    @include media-breakpoint-down(sm){
+        font-size: 19px;
+    }
 }
 
 // mixin 焦點卡片狀態
