@@ -86,13 +86,13 @@
     .spark1{ left: 0; bottom: 0; background: url(../images/sparks.png) no-repeat center center/ contain; 
             animation: sparks 1.5s both;
             @include media-breakpoint-down(sm){
-                width: 3vh; height: 3vh; left: -15px; bottom: -5px; 
+                width: 3vh; height: 3vh; left: -10px; bottom: -5px; 
             }    
     }
     .spark2{ right: 0; top: 0; background: url(../images/sparks.png) no-repeat center center/ contain; 
             animation: sparks 1.5s both;
             @include media-breakpoint-down(sm){
-                width: 3vh; height: 3vh; right: -15px; top: -5px;
+                width: 3vh; height: 3vh; right: -10px; top: -5px;
             }
     }
 
