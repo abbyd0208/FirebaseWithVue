@@ -1,0 +1,11 @@
+.nav{ background: $gray-200; margin-bottom: 50px;
+    .nav-link.active{
+        background: rgba($primary, 0.3);
+    }
+}
+
+.card_list{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
