@@ -3,7 +3,22 @@
         <header>
             <h4>任務旋轉門後台</h4>
         </header>
+         <aside>
+           
+            <div class="list-group">
+               <h5>任務管理</h5>
+               <a class="item-link" href="#">新增任務</a>
+               <a class="item-link" href="#">任務列表</a>
+               <a class="item-link" href="#">產業標籤管理</a>
+            </div>
+             <div class="list-group">
+               <h5>產業標籤管理</h5>
+               <a class="item-link" href="#">新增標籤</a>
+               <a class="item-link" href="#">標籤列表</a>
+            </div>
+        </aside>
         <div class="container-fluid">
+           
              <div class="container">
                  <h5>任務列表</h5>
                 <table class="table table-hover table-bordered">

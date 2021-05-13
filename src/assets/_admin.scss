@@ -1,14 +1,27 @@
 
 
 .admin{
-    header{ background:$primary; padding: 10px; color: $white;}
+    header{ background:$primary; padding: 10px;  color: lighten($primary, 45%);  position: fixed; left: 0; top: 0; width: 100%;
+        h4{ letter-spacing: 1px; margin-bottom: 0; }
+    }
   
-    .container-fluid{ background: $gray-100; padding: 10px;}
-    .container{ padding: 20px 0;}
+    .container-fluid{ background: $gray-100; margin-top: 55px;  padding-left: 200px;}
+    .container{ padding: 20px 0;   justify-content: center;}
+    aside{ position: fixed; left: 0; top: 48px; height: 100%; width: 200px; border-right: 1px solid lighten($primary, 10%); background: darken($primary, 20%); 
+        .list-group{
+            
+            h5{ background: darken($primary, 25%);  font-size: 1.2em;  color: lighten($primary, 30%); letter-spacing: 1px; border-bottom: 1px solid darken($primary, 5%); border-top: 1px solid darken($primary, 5%); padding: .5em; margin-bottom: 0;  padding-left: 24px;}
+            .item-link{color: lighten($primary, 45%); padding: .6em; padding-left: 24px;
+                &:hover{
+                    background: darken($primary,5%);
+                }
+            }
+        }
+        
+    }
 
-
-    .table{ border: 1px solid $gray-500; background: $white;
-        thead{ background: $gray-200; position:sticky; left: 0; top: 0;border: 1px solid green; }
-        tbody{ height: 400px; overflow-y: scroll; border: 1px solid red;}
+    .table{ border: 1px solid $gray-500; background: $white; 
+        thead{ background: $gray-200; position:sticky; left: 0; top: 0; }
+        tbody{ height: 400px; overflow-y: scroll;}
     }
 }
