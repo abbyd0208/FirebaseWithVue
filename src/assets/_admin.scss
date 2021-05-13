@@ -1,0 +1,14 @@
+
+
+.admin{
+    header{ background:$primary; padding: 10px; color: $white;}
+  
+    .container-fluid{ background: $gray-100; padding: 10px;}
+    .container{ padding: 20px 0;}
+
+
+    .table{ border: 1px solid $gray-500; background: $white;
+        thead{ background: $gray-200; position:sticky; left: 0; top: 0;border: 1px solid green; }
+        tbody{ height: 400px; overflow-y: scroll; border: 1px solid red;}
+    }
+}
