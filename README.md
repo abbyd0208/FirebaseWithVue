@@ -1,6 +1,6 @@
 # firebase_with_vue
 
-> A Vue.js project
+> A Vue.js project 結合 FireBase 與 Firebase Storage 製作的產品列表，再網址上打/admin即可進入後台
 
 ## Build Setup
 

@@ -1,8 +1,8 @@
 <template>
-    <div>
-        <div class="container">
-            <div class="card_list">
-                                <div class="card" style="width: 18rem;">
+    <div class="container">
+       
+         <div class="card_list">
+                <div class="card" style="width: 18rem;">
                     <img class="card-img-top" src="https://fakeimg.pl/250x100" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
@@ -36,12 +36,11 @@
                 </div>
             </div>
 
-        </div>
     </div>
 </template>
 
 <script>
-// import { defineComponent } from '@vue/composition-api'
+
 
 export default {
    name:'ProductList',
@@ -50,5 +49,6 @@ export default {
       msg: 'Welcome to Your Vue.js App'
     }
   },
+ 
 }
 </script>
