@@ -1,12 +1,11 @@
 <template>
     <div class="container">
-        我是管理介面
+        <router-view/>
     </div>
 </template>
 
+
 <script>
-
-
 export default {
     name:'Dashboard'
 }
