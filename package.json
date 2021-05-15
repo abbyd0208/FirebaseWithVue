@@ -63,5 +63,15 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "main": ".postcssrc.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abbyd0208/FirebaseWithVue.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abbyd0208/FirebaseWithVue/issues"
+  },
+  "homepage": "https://github.com/abbyd0208/FirebaseWithVue#readme"
 }
