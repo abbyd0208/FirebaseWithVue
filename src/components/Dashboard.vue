@@ -4,12 +4,10 @@
             <h4>任務旋轉門後台</h4>
         </header>
          <aside>
-           
             <div class="list-group">
                <h5>任務管理</h5>
                <a class="item-link" href="#">新增任務</a>
                <a class="item-link" href="#">任務列表</a>
-               <a class="item-link" href="#">產業標籤管理</a>
             </div>
              <div class="list-group">
                <h5>產業標籤管理</h5>
