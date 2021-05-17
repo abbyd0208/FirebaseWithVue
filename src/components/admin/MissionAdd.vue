@@ -4,6 +4,18 @@
         <div class="container">
             <form class="form">
                 <div class="form-group row">
+                    <label for="mission_id" class="col-sm-4 col-form-label">id</label>
+                    <div class="col-sm-8">
+                        <p>1(不可更改)</p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="order" class="col-sm-4 col-form-label">排序</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="order" placeholder="預設排序">
+                    </div>
+                </div>
+                <div class="form-group row">
                     <label for="" class="col-sm-4 col-form-label">任務標題</label>
                     <div class="col-sm-8">
                     <input type="text" class="form-control" id="subject" placeholder="請輸入任務標題">
@@ -50,6 +62,12 @@
                             <option>4</option>
                             <option>5</option>
                         </select>
+                        <label for="locations" class="col-sm-4 col-form-label">所選擇的標籤：</label>
+                    <div  class="col-sm-8">
+                        <span class="label ">台灣</span>
+                        <span class="label ">馬來西亞</span>
+                        <span class="label ">印度</span>
+                    </div>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -70,14 +88,8 @@
                         <input type="text" class="form-control" id="companyName" placeholder="輸入公司名稱">
                     </div>
                     <div class="col-sm-4">
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="showcompanyname" id="showcompanyname1" value="option1">
-                            <label class="form-check-label" for="showcompanyname1">開啟</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="showcompanyname" id="showcompanyname2" value="option2">
-                            <label class="form-check-label" for="showcompanyname2">關閉</label>
-                        </div>
+                       <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">顯示</label>
                     </div>
                 </div>
                 <div class="form-group row">

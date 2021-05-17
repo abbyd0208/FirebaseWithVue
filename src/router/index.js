@@ -5,6 +5,7 @@ import ProductsList from '@/components/ProductsList'
 import Dashboard from '@/components/Dashboard'
 import About from '@/components/About'
 import MissionAdd from '@/components/admin/MissionAdd'
+import MissionPoint from '@/components/admin/ＭissionPoint'
 
 Vue.use(Router)
 
@@ -37,6 +38,11 @@ export default new Router({
 					path: 'mission-add',
 					name: 'MissionAdd',
 					component: MissionAdd,
+				},
+				{
+					path: 'mission-point',
+					name: 'MissionPoint',
+					component: MissionPoint,
 				},
 			]
     }
