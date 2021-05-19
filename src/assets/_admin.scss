@@ -21,6 +21,7 @@
     }
 
     .table{ border: 1px solid $gray-500; background: $white; 
+        td{vertical-align:middle}
         thead{ background: $gray-200; position:sticky; left: 0; top: 0; }
         tbody{ height: 400px; overflow-y: scroll;}
     }

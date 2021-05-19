@@ -6,6 +6,7 @@ import Dashboard from '@/components/Dashboard'
 import About from '@/components/About'
 import MissionAdd from '@/components/admin/MissionAdd'
 import MissionPoint from '@/components/admin/ＭissionPoint'
+import IndustryManage from '@/components/admin/IndustryManage'
 
 Vue.use(Router)
 
@@ -43,6 +44,11 @@ export default new Router({
 					path: 'mission-point',
 					name: 'MissionPoint',
 					component: MissionPoint,
+				},
+        {
+					path: 'industry-manage',
+					name: 'IndustryManage',
+					component: IndustryManage,
 				},
 			]
     }

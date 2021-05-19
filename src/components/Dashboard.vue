@@ -15,7 +15,7 @@
             </div>
              <div class="list-group">
                <h5>產業標籤管理</h5>
-               <a class="item-link" href="#">新增標籤</a>
+                <router-link class="item-link"  to="/admin/industry-manage">產業標籤管理</router-link>
                <a class="item-link" href="#">標籤列表</a>
             </div>
         </aside>
@@ -54,7 +54,6 @@
                         
                     </tbody>
                 </table>
-
                 <router-view></router-view>
             </div>
         </div>
