@@ -6,6 +6,12 @@ import router from './router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 
+// 你可以指定所需要的插件
+import $ from 'jquery'
+import 'bootstrap'
+window.$ = $
+
+// const bootstrap = require('bootstrap') 
 Vue.config.productionTip = false
 Vue.use(VueAxios, axios)
 axios.defaults.withCredentials = true;
