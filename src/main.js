@@ -9,7 +9,15 @@ import VueAxios from 'vue-axios'
 // 你可以指定所需要的插件
 import $ from 'jquery'
 import 'bootstrap'
+
+// import './firebase/firebase'
+
+
+// export {
+//   db
+// }
 window.$ = $
+
 
 // const bootstrap = require('bootstrap') 
 Vue.config.productionTip = false
@@ -21,5 +29,5 @@ new Vue({
   el: '#app',
   router,
   components: { App },
-  template: '<App/>'
+  template: '<App/>',
 })
