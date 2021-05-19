@@ -7,7 +7,6 @@
                         <tr>
                             <th scope="col" width="20%">產業標籤id</th>
                             <th scope="col" width="50%">標籤語系</th>
-                            
                             <th scope="col" width="12%">操作</th>
                         </tr>
                     </thead>
