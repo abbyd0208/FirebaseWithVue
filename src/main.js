@@ -10,12 +10,9 @@ import VueAxios from 'vue-axios'
 import $ from 'jquery'
 import 'bootstrap'
 
-// import './firebase/firebase'
+import VeeValidate from 'vee-validate';
+Vue.use(VeeValidate);
 
-
-// export {
-//   db
-// }
 window.$ = $
 
 

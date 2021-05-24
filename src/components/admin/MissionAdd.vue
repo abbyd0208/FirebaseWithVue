@@ -2,40 +2,53 @@
     <div>
         <h3>新增任務</h3>
         <div class="container">
-            <form class="form">
+            <form class="form" @submit.prevent="validateBeforeSubmit">
                 <div class="form-group row">
                     <label for="mission_id" class="col-sm-4 col-form-label">id</label>
                     <div class="col-sm-8">
-                        <p>1(不可更改)</p>
+                        <p>{{newId}}</p>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="order" class="col-sm-4 col-form-label">排序</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" id="order" placeholder="預設排序">
+                        <input type="number" name="order" class="form-control" id="order" placeholder="請輸入排序" value="2"
+                        :class="{'is-invalid': errors.has('order') }"
+                        v-model.number="newId"
+                        v-validate="'required'">
+                         <span v-show="errors.has('order')" class="help invalid-feedback">{{ errors.first('order') }}</span>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="" class="col-sm-4 col-form-label">任務標題</label>
                     <div class="col-sm-8">
-                    <input type="text" class="form-control" id="subject" placeholder="請輸入任務標題">
+                        <input type="text" name="subject" class="form-control" id="subject" placeholder="請輸入任務標題"
+                        :class="{'is-invalid': errors.has('subject') }"
+                        v-model.trim="mission.subject"
+                        v-validate="'required'">
+                         <span v-show="errors.has('subject')" class="help invalid-feedback">{{ errors.first('subject') }}</span>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="" class="col-sm-4 col-form-label">主圖檔名</label>
                     <div class="col-sm-8">
-                    <input type="text" class="form-control" id="imgfilename" placeholder="主圖檔名 ex:example.jpg">
+                    <input type="text" name="cover" class="form-control" id="imgfilename" placeholder="主圖檔名 ex:example.jpg"
+                    :class="{'is-invalid': errors.has('cover') }" 
+                    v-model.trim="mission.cover">
+                     <span v-show="errors.has('cover')" class="help invalid-feedback">{{ errors.first('cover') }}</span>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-4 col-form-label">推薦星星</label>
                     <div class="col-sm-8">
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="recommend" id="recommend1" value="option1">
+                            <input class="form-check-input" type="radio" name="recommend" id="recommend1" value="1"
+                            v-model="mission.recommend">
                             <label class="form-check-label" for="recommend1">開啟</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="recommend" id="recommend2" value="option2">
+                            <input class="form-check-input" type="radio" name="recommend" id="recommend2" value="0"
+                             v-model="mission.recommend">
                             <label class="form-check-label" for="recommend2">關閉</label>
                         </div>
                     </div>
@@ -43,31 +56,40 @@
                 <div class="form-group row">
                     <label for="subject_start_date" class="col-sm-4 col-form-label">需求開始日期</label>
                     <div class="col-sm-8">
-                        <input type="date" class="form-control" id="subject_start_date">
+                        <input type="date" name="subject_start_date" class="form-control" id="subject_start_date"
+                         :class="{'is-invalid': errors.has('subject_start_date')}"
+                         v-model="mission.subject_start_date">
+                         <span v-show="errors.has('subject_start_date')" class="help invalid-feedback">{{ errors.first('subject_start_date') }}</span>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="subject_start_end" class="col-sm-4 col-form-label">需求結束日期</label>
                     <div class="col-sm-8">
-                        <input type="date" class="form-control" id="subject_start_end">
+                        <input type="date" name="subject_start_end" class="form-control" id="subject_start_end"
+                        :class="{'is-invalid': errors.has('subject_start_end')}"
+                        v-model="mission.subject_end_date">
+                         <span v-show="errors.has('subject_start_end')" class="help invalid-feedback">{{ errors.first('subject_start_end') }}</span>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="locations" class="col-sm-4 col-form-label">需求地區標籤 (最多3個)</label>
                     <div class="col-sm-8">
-                        <select class="form-control">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                        <select class="form-control" @change="addLocations($event)">
+                            <option value="台灣">台灣</option>
+                            <option value="中國">中國</option>
+                            <option value="香港">香港</option>
+                            <option value="日本">日本</option>
+                            <option value="泰國">泰國</option>
+                            <option value="馬來西亞">馬來西亞</option>
+                            <option value="柬埔寨">柬埔寨</option>
+                            <option value="越南">越南</option>
+                            <option value="新加玻">新加玻</option>
+                            <option value="印尼">印尼</option>
                         </select>
                         <label for="locations" class="col-sm-4 col-form-label">所選擇的標籤：</label>
-                    <div  class="col-sm-8">
-                        <span class="label ">台灣</span>
-                        <span class="label ">馬來西亞</span>
-                        <span class="label ">印度</span>
-                    </div>
+                        <div class="col-sm-8">
+                            <span class="label" v-for="(item,index) in locations" :key="index">{{item}} <em @click="removeLocations(index)">X</em></span>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -85,35 +107,45 @@
                 <div class="form-group row">
                     <label for="companyName" class="col-sm-4 col-form-label">公司名稱</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" id="companyName" placeholder="輸入公司名稱">
+                        <input type="text" name="companyName" class="form-control" id="companyName" placeholder="輸入公司名稱"
+                        :class="{'is-invalid': errors.has('companyName') }"
+                        v-model="mission.company_name"
+                        v-validate="'required'">
+                         <span v-show="errors.has('companyName')" class="help invalid-feedback">{{ errors.first('companyName') }}</span>
                     </div>
                     <div class="col-sm-4">
-                       <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                       <input type="checkbox" name="show_company_name" class="form-check-input" id="show_company_name" 
+                        :class="{'is-invalid': errors.has('companyName') }"
+                        v-model="mission.show_company_name"
+                        v-validate="'required'">
                         <label class="form-check-label" for="exampleCheck1">顯示</label>
+                        <span v-show="errors.has('show_company_name')" class="help invalid-feedback">{{ errors.first('show_company_name') }}</span>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="company_intro" class="col-sm-4 col-form-label">公司側寫</label>
                     <div class="col-sm-8">
-                    <textarea  class="form-control" name="" id="company_intro" cols="30" rows="10" placeholder="請輸入公司側寫"></textarea>
+                    <textarea  class="form-control" name="" id="company_intro" cols="30" rows="10" placeholder="請輸入公司側寫" v-model="mission.company_intro"></textarea>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="" class="col-sm-4 col-form-label">刊登開始日期</label>
                     <div class="col-sm-8">
-                        <input type="date" class="form-control" id="publish_start_date">
+                        <input type="date" class="form-control" id="publish_start_date"
+                        v-model="mission.publish_start_date">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="" class="col-sm-4 col-form-label">刊登結束日期</label>
                     <div class="col-sm-8">
-                    <input type="date" class="form-control" id="publish_start_end">
+                    <input type="date" class="form-control" id="publish_end_date"
+                    v-model="mission.publish_end_date">
                     </div>
                 </div>
+                 <div class="text-center">
+                    <button type="submit" class="btn btn-primary">新增</button>
+                </div>
             </form>
-            <div class="text-center">
-                <button type="button" id="addMission" class="btn btn-primary">Primary</button>
-            </div>
         </div>
     </div>
 </template>
@@ -126,7 +158,62 @@
 </style>
 
 <script>
+import db from '../../firebase/firebase.js';
 export default {
-    name:'MissionAdd'
+    name:'MissionAdd',
+    data(){
+        return{
+            mission:{},
+            locations:[],
+            newId:'',
+           
+        }
+    },
+    methods:{
+        addLocations(event){
+            let vm = this;
+            if(vm.locations.length>2){
+                alert('地區選項只能有3個')
+                return;
+            }
+            vm.locations.push(event.target.value)
+        },
+        removeLocations(index){
+            let vm = this;
+            vm.locations.splice(index,1)
+        },
+        validateBeforeSubmit(){
+            this.$validator.validateAll().then((result) => {
+                if (result) {
+                    alert('新增成功');
+                    return;
+                }
+                alert('請修正錯誤');
+            });
+        }
+    },
+    created(){
+        let vm = this;
+         // 取得集合
+        let docRef = db.collection("missions");
+      
+        // 取得檔案
+        docRef
+        .get()
+        .then((doc) => {
+            
+            doc.forEach(item =>{
+                console.log(item)
+                if (item.exists) {
+                    vm.newId = item.data().id +1
+                } else {
+                    console.log("No such document!");
+                }
+            })
+            
+        }).catch((error) => {
+            console.log("Error getting document:", error);
+        });
+    }
 }
 </script>
