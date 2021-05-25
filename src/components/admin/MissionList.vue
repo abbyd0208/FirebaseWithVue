@@ -18,7 +18,7 @@
             <tbody >
                     <tr v-for="(item) in missions" :key="item.id"> 
                     <td>{{item.id}}</td>
-                    <td>{{item.order}}</td>
+                    <td>{{item.priority}}</td>
                     <td>{{item.subject}}</td>
                     <td>{{item.company_name}}</td>
                     <td>{{item.recommend? "推薦":""}}</td>
@@ -51,9 +51,9 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="order" class="col-sm-4 col-form-label">排序</label>
+                            <label for="priority" class="col-sm-4 col-form-label">排序</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="order" placeholder="預設排序">
+                                <input type="text" class="form-control" id="priority" placeholder="預設排序">
                             </div>
                         </div>
                         <div class="form-group row">
