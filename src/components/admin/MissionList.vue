@@ -25,16 +25,17 @@
                     <td>{{item.subject_start_date}}</td>
                     <td>{{item.subject_end_date}}</td>
                     <td>{{item.status == 1 ? "上架":"下架"}}</td>
-                    <td> <button type="button" class="btn btn-primary btn-sm" @click="showEditModel">編輯</button>
+                    <td> <button type="button" class="btn btn-primary btn-sm" @click="showEditModel(item.id)">編輯</button>
                         <button type="button" class="btn btn-danger btn-sm">刪除</button>
                     </td>
                 </tr>
                 
             </tbody>
         </table>
-         <!-- Modal -->
-        <div class="modal fade" id="editMinnion" tabindex="-1" role="dialog" aria-labelledby="editMinnionTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
+
+        <!-- Modal -->
+        <div class="modal fade " id="editMinnion" tabindex="-1" role="dialog" aria-labelledby="editMinnionTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="editMinnionTitle">Modal title</h5>
@@ -43,40 +44,41 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form class="form">
+                    <!-- {{filterEditModalData}} -->
+                    <form class="form" v-for="(item) in editItem" :key="item.id">
                         <div class="form-group row">
                             <label for="mission_id" class="col-sm-4 col-form-label">id</label>
                             <div class="col-sm-8">
-                                <p>1(不可更改)</p>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="priority" class="col-sm-4 col-form-label">排序</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="priority" placeholder="預設排序">
+                                <p>{{item.id}}</p>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="" class="col-sm-4 col-form-label">任務標題</label>
                             <div class="col-sm-8">
-                            <input type="text" class="form-control" id="subject" placeholder="請輸入任務標題">
+                            <input type="text" class="form-control" id="subject" placeholder="請輸入任務標題"
+                            v-model="item.subject">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="" class="col-sm-4 col-form-label">主圖檔名</label>
                             <div class="col-sm-8">
-                            <input type="text" class="form-control" id="imgfilename" placeholder="主圖檔名 ex:example.jpg">
+                            <input type="text" class="form-control" id="imgfilename" placeholder="主圖檔名 ex:example.jpg"
+                             v-model="item.cover">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label">推薦星星</label>
                             <div class="col-sm-8">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="recommend" id="recommend1" value="option1">
+                                    <input class="form-check-input" type="radio" name="recommend" id="recommend1" :value="1" 
+                                    :checked="item.recommend == 1"
+                                    v-model="item.recommend">
                                     <label class="form-check-label" for="recommend1">開啟</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="recommend" id="recommend2" value="option2">
+                                    <input class="form-check-input" type="radio" name="recommend" id="recommend2" :value="0" 
+                                    :checked="item.recommend == 0"
+                                     v-model="item.recommend">
                                     <label class="form-check-label" for="recommend2">關閉</label>
                                 </div>
                             </div>
@@ -84,13 +86,15 @@
                         <div class="form-group row">
                             <label for="subject_start_date" class="col-sm-4 col-form-label">需求開始日期</label>
                             <div class="col-sm-8">
-                                <input type="date" class="form-control" id="subject_start_date">
+                                <input type="date" class="form-control" id="subject_start_date" 
+                                v-model="item.subject_start_date">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="subject_start_end" class="col-sm-4 col-form-label">需求結束日期</label>
+                            <label for="subject_end_date" class="col-sm-4 col-form-label">需求結束日期</label>
                             <div class="col-sm-8">
-                                <input type="date" class="form-control" id="subject_start_end">
+                                <input type="date" class="form-control" id="subject_end_date"
+                                 v-model="item.subject_end_date">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -129,7 +133,9 @@
                                 <input type="text" class="form-control" id="companyName" placeholder="輸入公司名稱">
                             </div>
                             <div class="col-sm-4">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1"
+                                :true-value="1"
+                                :false-value="0">
                                 <label class="form-check-label" for="exampleCheck1">顯示</label>
                             </div>
                         </div>
@@ -151,11 +157,18 @@
                             <input type="date" class="form-control" id="publish_start_end">
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="priority" class="col-sm-4 col-form-label">排序</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="priority" placeholder="預設排序"  v-model="item.priority">
+                            </div>
+                        </div>
+
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-                    <button type="button" class="btn btn-primary">儲存變更</button>
+                    <button type="button" class="btn btn-primary" @click="updateMission">儲存變更</button>
                 </div>
                 </div>
             </div>
@@ -170,12 +183,31 @@ export default {
     name:'MissionList',
     data(){
         return{
-            missions:[]
+            missions:[],
+            editId:0,
+            editItem:{}
+        }
+    },
+    
+    computed:{
+        filterEditModalData:function(){
+            var editMission = this.missions.filter((item,idx,array)=>{
+                return item.id == this.editId
+            });
+            
+            this.editItem = editMission
+            return editMission
         }
     },
     methods:{
-        showEditModel(){
-            $('#editMinnion').modal('show')
+        showEditModel(id){
+      
+            this.editId = id;
+
+            $('#editMinnion').modal('show');
+        },
+        updateMission(){
+
         }
     },
     created(){
@@ -187,12 +219,12 @@ export default {
         docRef
         .get()
         .then((doc) => {
-            console.log(doc)
+            // console.log(doc)
 
             doc.forEach(item =>{
-                console.log(item)
+                // console.log(item)
                 if (item.exists) {
-                    console.log(item.data())
+                    // console.log(item.data())
                     vm.missions .push(item.data()) 
                 } else {
                     console.log("No such document!");

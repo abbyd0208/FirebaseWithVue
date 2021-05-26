@@ -4,16 +4,6 @@
         <div class="container">
             <form class="form" @submit.prevent="validateBeforeSubmit">
                 <div class="form-group row">
-                    <label for="priority" class="col-sm-4 col-form-label">排序</label>
-                    <div class="col-sm-8">
-                        <input type="number" name="priority" class="form-control" id="priority" placeholder="請輸入排序" 
-                        :class="{'is-invalid': errors.has('priority') }"
-                        v-model.number="mission.priority"
-                        v-validate="'required'">
-                         <span v-show="errors.has('priority')" class="help invalid-feedback">{{ errors.first('priority') }}</span>
-                    </div>
-                </div>
-                <div class="form-group row">
                     <label for="" class="col-sm-4 col-form-label">任務標題</label>
                     <div class="col-sm-8">
                         <input type="text" name="subject" class="form-control" id="subject" placeholder="請輸入任務標題"
@@ -21,6 +11,16 @@
                         v-model.trim="mission.subject"
                         v-validate="'required'">
                          <span v-show="errors.has('subject')" class="help invalid-feedback">{{ errors.first('subject') }}</span>
+                    </div>
+                </div>
+                 <div class="form-group row">
+                    <label for="" class="col-sm-4 col-form-label">任務說明</label>
+                    <div class="col-sm-8">
+                        <textarea  class="form-control" name="subject_intro" id="subject_intro" cols="30" rows="10" placeholder="任務說明" 
+                        :class="{'is-invalid': errors.has('subject_intro') }"
+                        v-model="mission.subject_intro"
+                        v-validate="'required'"></textarea>
+                        <span v-show="errors.has('subject_intro')" class="help invalid-feedback">{{ errors.first('subject_intro') }}</span>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -31,6 +31,7 @@
                     v-model.trim="mission.cover"
                     v-validate="'required'">
                      <span v-show="errors.has('cover')" class="help invalid-feedback">{{ errors.first('cover') }}</span>
+                      <small  class="text-primary">請輸入圖片所在位置的網址 尺寸：至少 800 x 600 圖片格式：JPG、PNG 檔案大小：1MB 內</small>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -38,12 +39,12 @@
                     <div class="col-sm-8">
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="recommend" id="recommend1" value="1"
-                            v-model="mission.recommend">
+                            v-model="mission.recommend" :checked="mission.recommend == 1">
                             <label class="form-check-label" for="recommend1">開啟</label>
                         </div>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="recommend" id="recommend2" value="0"
-                             v-model="mission.recommend">
+                             v-model="mission.recommend" :checked="mission.recommend == 0">
                             <label class="form-check-label" for="recommend2">關閉</label>
                         </div>
                     </div>
@@ -92,12 +93,13 @@
                 <div class="form-group row">
                     <label for="" class="col-sm-4 col-form-label">需求產業標籤 (僅限1個)</label>
                     <div class="col-sm-8">
-                        <select class="form-control">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                        <select class="form-control" 
+                        v-model="mission.industryTag">
+                            <option value="food">food</option>
+                            <option value="medical">medical</option>
+                            <option value="">3</option>
+                            <option value="">4</option>
+                            <option value="">5</option>
                         </select>
                     </div>
                 </div>
@@ -108,13 +110,11 @@
                         :class="{'is-invalid': errors.has('companyName') }"
                         v-model="mission.company_name"
                         v-validate="'required'">
-                         <span v-show="errors.has('companyName')" class="help invalid-feedback">{{ errors.first('companyName') }}</span>
+                        <span v-show="errors.has('companyName')" class="help invalid-feedback">{{ errors.first('companyName') }}</span>
                     </div>
                     <div class="col-sm-4">
                        <input type="checkbox" name="show_company_name" class="form-check-input" id="show_company_name" 
-                        :class="{'is-invalid': errors.has('companyName') }"
-                        v-model="mission.show_company_name"
-                        v-validate="'required'">
+                       v-model="mission.show_company_name">
                         <label class="form-check-label" for="exampleCheck1">顯示</label>
                         <span v-show="errors.has('show_company_name')" class="help invalid-feedback">{{ errors.first('show_company_name') }}</span>
                     </div>
@@ -122,7 +122,11 @@
                 <div class="form-group row">
                     <label for="company_intro" class="col-sm-4 col-form-label">公司側寫</label>
                     <div class="col-sm-8">
-                    <textarea  class="form-control" name="" id="company_intro" cols="30" rows="10" placeholder="請輸入公司側寫" v-model="mission.company_intro"></textarea>
+                    <textarea  class="form-control" name="company_intro" id="company_intro" cols="30" rows="10" placeholder="請輸入公司側寫" 
+                    :class="{'is-invalid': errors.has('company_intro') }"
+                    v-model="mission.company_intro"
+                    v-validate="'required'"></textarea>
+                    <span v-show="errors.has('company_intro')" class="help invalid-feedback">{{ errors.first('company_intro') }}</span>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -143,9 +147,21 @@
                     v-model="mission.publish_end_date"
                     v-validate="'required'">
                     <span v-show="errors.has('publish_end_date')" class="help invalid-feedback">{{ errors.first('publish_end_date') }}</span>
+                    <small  class="text-primary">系統將依據「刊登結束日期」判斷該任務是否過期</small>
                     </div>
                 </div>
-                 <div class="form-group row">
+                <div class="form-group row">
+                    <label for="priority" class="col-sm-4 col-form-label">排序</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="priority" class="form-control" id="priority" 
+                        :class="{'is-invalid': errors.has('priority') }"
+                        v-model.number="mission.priority"
+                        v-validate="'required'">
+                         <span v-show="errors.has('priority')" class="help invalid-feedback">{{ errors.first('priority') }}</span>
+                         <small class="text-primary">排序權重值數字越大的，會排在越上面</small>
+                    </div>
+                </div>
+                <div class="form-group row">
                     <label class="col-sm-4 col-form-label">上/下架</label>
                     <div class="col-sm-8">
                         <div class="form-check form-check-inline">
@@ -184,11 +200,36 @@ export default {
             mission:{
                 locations:[],
                 enable:0,
-                recommend:0
+                recommend:0,
+                priority:null
             },
         }
     },
     methods:{
+        getmissionOrder(){
+             let vm = this;
+            // 取得集合
+            let docRef = db.collection("missions");
+        
+            // 取得檔案
+            docRef
+            .get()
+            .then((doc) => {
+                doc.forEach(item =>{
+                    console.log(item)
+                    if (item.exists) {
+                        vm.mission.priority = item.data().id +1;
+                        
+                    } else {
+                        console.log("No such document!");
+                    }
+                })
+                
+            }).catch((error) => {
+                console.log("Error getting document:", error);
+            });
+        }
+        ,
         addLocations(event){
             console.log('onChange')
             let vm = this;
@@ -207,46 +248,27 @@ export default {
         },
         validateBeforeSubmit(){
             let vm = this;
-
-
             
             this.$validator.validateAll().then((result) => {
                 if (result) {
-                     db.collection("articles").add(vm.mission)
+                   
+                   db.collection("missions").add(vm.mission)
                     .then((docRef) => {
                         console.log("Document written with ID: ", docRef.id);
-                            console(docRef);
+                        alert('任務新增完成');
+                        vm.getmissionOrder();
                     })
                     .catch((error) => {
-                        console.error("Error adding document: ", error);
+                        console.log("Error adding document: ", error);
                     });
                 }
+
                 alert('請修正錯誤');
             });
         }
     },
     created(){
-        let vm = this;
-         // 取得集合
-        let docRef = db.collection("missions");
-      
-        // 取得檔案
-        docRef
-        .get()
-        .then((doc) => {
-            doc.forEach(item =>{
-                console.log(item)
-                if (item.exists) {
-                    vm.mission.priority = item.data().id +1;
-                    vm.mission.id = item.data().id +1;
-                } else {
-                    console.log("No such document!");
-                }
-            })
-            
-        }).catch((error) => {
-            console.log("Error getting document:", error);
-        });
+       this.getmissionOrder()
     }
 }
 </script>
