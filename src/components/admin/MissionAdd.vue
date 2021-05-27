@@ -118,7 +118,6 @@
                         :true-value="1"
                         :false-value="0">
                         <label class="form-check-label" for="exampleCheck1">顯示</label>
-                        <span v-show="errors.has('show_company_name')" class="help invalid-feedback">{{ errors.first('show_company_name') }}</span>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -246,7 +245,7 @@ export default {
         },
         removeLocations(index){
             let vm = this;
-            vm.locations.splice(index,1)
+            vm.mission.locations.splice(index,1)
         },
         validateBeforeSubmit(){
             let vm = this;
