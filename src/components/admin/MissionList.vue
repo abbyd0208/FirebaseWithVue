@@ -44,7 +44,6 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    {{editItem}}
                     <form class="form" >
                         <div class="form-group row">
                             <label for="mission_id" class="col-sm-4 col-form-label">id</label>
@@ -101,7 +100,8 @@
                         <div class="form-group row">
                             <label for="locations" class="col-sm-4 col-form-label">需求地區標籤 (最多3個)</label>
                             <div class="col-sm-8">
-                                <select class="form-control">
+                                <select class="form-control" 
+                                v-model="editItem.locations">
                                     <option>1</option>
                                     <option>2</option>
                                     <option>3</option>
@@ -109,16 +109,16 @@
                                     <option>5</option>
                                 </select>
                                 <label for="locations" class="col-sm-4 col-form-label">所選擇的標籤：</label>
-                            <div  class="col-sm-8">
+                            <div class="col-sm-8">
                                 <span class="label" v-for="(location,index) in editItem.locations" :key="index">{{location}}</span>
-                               
                             </div>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="" class="col-sm-4 col-form-label">需求產業標籤 (僅限1個)</label>
                             <div class="col-sm-8">
-                                <select class="form-control" v-model="editItem.industryTag">
+                                <select class="form-control" 
+                                v-model="editItem.industryTag">
                                     <option>1</option>
                                     <option>2</option>
                                     <option>3</option>
@@ -130,7 +130,8 @@
                         <div class="form-group row">
                             <label for="companyName" class="col-sm-4 col-form-label">公司名稱</label>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control" id="companyName" placeholder="輸入公司名稱">
+                                <input type="text" class="form-control" id="companyName" placeholder="輸入公司名稱"
+                                v-model="editItem.company_name">
                             </div>
                             <div class="col-sm-4">
                             <input type="checkbox" class="form-check-input" id="exampleCheck1"
@@ -207,7 +208,7 @@ export default {
         },
         getCollection(){
             let vm = this;
-            let docRef = db.collection("missions");
+            let docRef = db.collection("missions").orderBy("priority","asc");
             let payload=[];
             docRef
             .get()

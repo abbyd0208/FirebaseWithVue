@@ -114,7 +114,9 @@
                     </div>
                     <div class="col-sm-4">
                        <input type="checkbox" name="show_company_name" class="form-check-input" id="show_company_name" 
-                       v-model="mission.show_company_name">
+                       v-model="mission.show_company_name"
+                        :true-value="1"
+                        :false-value="0">
                         <label class="form-check-label" for="exampleCheck1">顯示</label>
                         <span v-show="errors.has('show_company_name')" class="help invalid-feedback">{{ errors.first('show_company_name') }}</span>
                     </div>
