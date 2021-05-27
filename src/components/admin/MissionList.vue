@@ -25,7 +25,7 @@
                     <td>{{item.subject_start_date}}</td>
                     <td>{{item.subject_end_date}}</td>
                     <td>{{item.status == 1 ? "上架":"下架"}}</td>
-                    <td> <button type="button" class="btn btn-primary btn-sm" @click="showEditModel(item.id)">編輯</button>
+                    <td> <button type="button" class="btn btn-primary btn-sm" @click="showEditModel(item)">編輯</button>
                         <button type="button" class="btn btn-danger btn-sm">刪除</button>
                     </td>
                 </tr>
@@ -44,26 +44,27 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <!-- {{filterEditModalData}} -->
-                    <form class="form" v-for="(item) in editItem" :key="item.id">
+                    {{editItem}}
+                    <form class="form" >
                         <div class="form-group row">
                             <label for="mission_id" class="col-sm-4 col-form-label">id</label>
                             <div class="col-sm-8">
-                                <p>{{item.id}}</p>
+                                <p>{{editItem.id}}</p>
+                                
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="" class="col-sm-4 col-form-label">任務標題</label>
                             <div class="col-sm-8">
-                            <input type="text" class="form-control" id="subject" placeholder="請輸入任務標題"
-                            v-model="item.subject">
+                            <input type="text" class="form-control" id="subject"
+                            v-model="editItem.subject">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="" class="col-sm-4 col-form-label">主圖檔名</label>
                             <div class="col-sm-8">
                             <input type="text" class="form-control" id="imgfilename" placeholder="主圖檔名 ex:example.jpg"
-                             v-model="item.cover">
+                             v-model="editItem.cover">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -71,14 +72,14 @@
                             <div class="col-sm-8">
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="recommend" id="recommend1" :value="1" 
-                                    :checked="item.recommend == 1"
-                                    v-model="item.recommend">
+                                    :checked="editItem.recommend == 1"
+                                    v-model="editItem.recommend">
                                     <label class="form-check-label" for="recommend1">開啟</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="recommend" id="recommend2" :value="0" 
-                                    :checked="item.recommend == 0"
-                                     v-model="item.recommend">
+                                    :checked="editItem.recommend == 0"
+                                     v-model="editItem.recommend">
                                     <label class="form-check-label" for="recommend2">關閉</label>
                                 </div>
                             </div>
@@ -87,14 +88,14 @@
                             <label for="subject_start_date" class="col-sm-4 col-form-label">需求開始日期</label>
                             <div class="col-sm-8">
                                 <input type="date" class="form-control" id="subject_start_date" 
-                                v-model="item.subject_start_date">
+                                v-model="editItem.subject_start_date">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="subject_end_date" class="col-sm-4 col-form-label">需求結束日期</label>
                             <div class="col-sm-8">
                                 <input type="date" class="form-control" id="subject_end_date"
-                                 v-model="item.subject_end_date">
+                                 v-model="editItem.subject_end_date">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -109,16 +110,15 @@
                                 </select>
                                 <label for="locations" class="col-sm-4 col-form-label">所選擇的標籤：</label>
                             <div  class="col-sm-8">
-                                <span class="label ">台灣</span>
-                                <span class="label ">馬來西亞</span>
-                                <span class="label ">印度</span>
+                                <span class="label" v-for="(location,index) in editItem.locations" :key="index">{{location}}</span>
+                               
                             </div>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="" class="col-sm-4 col-form-label">需求產業標籤 (僅限1個)</label>
                             <div class="col-sm-8">
-                                <select class="form-control">
+                                <select class="form-control" v-model="editItem.industryTag">
                                     <option>1</option>
                                     <option>2</option>
                                     <option>3</option>
@@ -160,7 +160,7 @@
                         <div class="form-group row">
                             <label for="priority" class="col-sm-4 col-form-label">排序</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="priority" placeholder="預設排序"  v-model="item.priority">
+                                <input type="text" class="form-control" id="priority" placeholder="預設排序"  v-model="editItem.priority">
                             </div>
                         </div>
 
@@ -188,52 +188,46 @@ export default {
             editItem:{}
         }
     },
-    
-    computed:{
-        filterEditModalData:function(){
-            var editMission = this.missions.filter((item,idx,array)=>{
-                return item.id == this.editId
-            });
-            
-            this.editItem = editMission
-            return editMission
-        }
-    },
     methods:{
-        showEditModel(id){
-      
-            this.editId = id;
-
+        showEditModel(item){
+            console.log(item)
+            this.editItem = item;
             $('#editMinnion').modal('show');
         },
         updateMission(){
+            // 取得文件id並且編輯
+            let vm = this;
+            let docRef = db.collection("missions");
 
+            docRef.doc( vm.editItem.docId).update(vm.editItem).then(function() {
+                $('#editMinnion').modal('hide');
+                vm.getCollection();
+                console.log("更新成功");
+            });
+        },
+        getCollection(){
+            let vm = this;
+            let docRef = db.collection("missions");
+            let payload=[];
+            docRef
+            .get()
+            .then((doc) => {
+                doc.forEach(item =>{
+                    if (item.exists) {
+                        // 將集合的id與doc內的內容一起存進資料內
+                        payload.push({docId:item.id, ...item.data()}) 
+                        vm.missions = payload;
+                    } else {
+                        console.log("No such document!");
+                    }
+                })
+            }).catch((error) => {
+                console.log("Error getting document:", error);
+            });
         }
     },
     created(){
-        let vm = this;
-         // 取得集合
-        let docRef = db.collection("missions");
-        // console.log(docRef)
-        // 取得檔案
-        docRef
-        .get()
-        .then((doc) => {
-            // console.log(doc)
-
-            doc.forEach(item =>{
-                // console.log(item)
-                if (item.exists) {
-                    // console.log(item.data())
-                    vm.missions .push(item.data()) 
-                } else {
-                    console.log("No such document!");
-                }
-            })
-            
-        }).catch((error) => {
-            console.log("Error getting document:", error);
-        });
+        this.getCollection()
     }
 }
 </script>
