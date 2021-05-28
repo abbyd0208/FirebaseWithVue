@@ -38,7 +38,7 @@
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editMinnionTitle">Modal title</h5>
+                    <h5 class="modal-title" id="editMinnionTitle">編輯任務</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
@@ -88,15 +88,12 @@
                                     <input class="form-check-input" type="radio" name="recommend" id="recommend1" 
                                     :value="1" 
                                     :checked="editItem.recommend == 1"
-                                    :class="{'is-invalid': errors.has('priority') }"
-                                    v-model="editItem.recommend"
-                                    v-validate="'required'">
+                                    v-model="editItem.recommend">
                                     <label class="form-check-label" for="recommend1">開啟</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="recommend" id="recommend2" 
                                     :value="0" 
-                                    :checked="editItem.recommend == 0"
                                     v-model="editItem.recommend">
                                     <label class="form-check-label" for="recommend2">關閉</label>
                                 </div>
@@ -115,10 +112,11 @@
                         <div class="form-group row">
                             <label for="subject_end_date"  class="col-sm-4 col-form-label">需求結束日期</label>
                             <div class="col-sm-8">
-                                <input type="date" name="subject_start_end" class="form-control" id="subject_end_date"
-                                :class="{'is-invalid': errors.has('subject_start_end')}"
+                                <input type="date" name="subject_end_date" class="form-control" id="subject_end_date"
+                                :class="{'is-invalid': errors.has('subject_end_date')}"
                                 v-model="editItem.subject_end_date"
                                 v-validate="'required'">
+                                <span v-show="errors.has('subject_end_date')" class="help invalid-feedback">{{ errors.first('subject_end_date') }}</span>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -166,7 +164,7 @@
                                 <span v-show="errors.has('companyName')" class="help invalid-feedback">{{ errors.first('companyName') }}</span>
                             </div>
                             <div class="col-sm-4">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1"
+                            <input type="checkbox" name="show_company_name" class="form-check-input" id="exampleCheck1"
                                 :true-value="1"
                                 :false-value="0"
                                 :checked="editItem.show_company_name == 1">
@@ -199,16 +197,15 @@
                             <input type="date" name="publish_end_date" class="form-control" id="publish_end_date"
                             :class="{'is-invalid': errors.has('publish_end_date') }"
                             v-model="editItem.publish_end_date"
-                            v-validate="'required'"
-                            >
+                            v-validate="'required'">
                             <span v-show="errors.has('publish_end_date')" class="help invalid-feedback">{{ errors.first('publish_end_date') }}</span>
                             <small class="text-primary">系統將依據「刊登結束日期」判斷該任務是否過期</small>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="priority" name="priority" class="col-sm-4 col-form-label">排序</label>
+                            <label for="priority"  class="col-sm-4 col-form-label">排序</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="priority" placeholder="預設排序" 
+                                <input type="text" name="priority" class="form-control" id="priority" placeholder="預設排序" 
                                 :class="{'is-invalid': errors.has('priority') }"
                                 v-model="editItem.priority"
                                 v-validate="'required'">
@@ -246,40 +243,38 @@ export default {
     methods:{
         showEditModel(item){
             console.log(item)
-            this.editItem = item;
+            this.editItem =Object.assign({},item);
+
             $('#editMinnion').modal('show');
         },
         validateBeforeSubmit(){
             let vm = this;
-            
             this.$validator.validateAll().then((result) => {
                 if (result) {
-                   
                     let docRef = db.collection("missions");
-
-                    docRef.doc( vm.editItem.docId).update(vm.editItem)
+                    docRef.doc(vm.editItem.docId).update(vm.editItem)
                     .then(function() {
                         $('#editMinnion').modal('hide');
                         vm.getCollection();
-                        alert("更新成功");
+                        vm.$bus.$emit('message:push','更新成功','success');
                     })
                     .catch((error) => {
                         console.log("Error adding document: ", error);
+                        $('#editMinnion').modal('hide');
+                        vm.getCollection();
+                        vm.$bus.$emit('message:push',error);
                     });
                 }
 
-                alert('請修正錯誤');
+                vm.$bus.$emit('message:push','請修正錯誤');
             });
         },
         addLocations(event){
-            console.log('onChange')
             let vm = this;
             if(vm.mission.locations.length == 3){
-                console.log('stop');
-                alert('地區選項只能有3個');
+                vm.$bus.$emit('message:push','地區選項只能有3個');
                 return;
             }else{
-                console.log('contiune')
                 vm.mission.locations.push(event.target.value);
             }
         },
@@ -309,7 +304,8 @@ export default {
         }
     },
     created(){
-        this.getCollection()
+        this.getCollection();
+        
     }
 }
 </script>

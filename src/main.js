@@ -10,6 +10,9 @@ import VueAxios from 'vue-axios'
 import $ from 'jquery'
 import 'bootstrap'
 
+import './bus'
+
+
 import VeeValidate from 'vee-validate';
 Vue.use(VeeValidate);
 

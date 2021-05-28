@@ -1,5 +1,6 @@
 <template>
     <div class="admin">
+        <Alert></Alert>
         <header>
             <h4>任務旋轉門後台</h4>
         </header>
@@ -15,6 +16,7 @@
 
 <script>
 import Aside from'./Aside';
+import Alert from'./AlertMessage';
 
 export default {
     name:'Dashboard',
@@ -24,7 +26,8 @@ export default {
         }
     },
     components:{
-        Aside
+        Aside,
+        Alert
     },
     
 }

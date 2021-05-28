@@ -232,14 +232,11 @@ export default {
         }
         ,
         addLocations(event){
-            console.log('onChange')
             let vm = this;
             if(vm.mission.locations.length == 3){
-                console.log('stop');
-                alert('地區選項只能有3個');
+                vm.$bus.$emit('message:push','地區選項只能有3個');
                 return;
             }else{
-                console.log('contiune')
                 vm.mission.locations.push(event.target.value);
             }
         },
@@ -256,7 +253,7 @@ export default {
                    db.collection("missions").add(vm.mission)
                     .then((docRef) => {
                         console.log("Document written with ID: ", docRef.id);
-                        alert('任務新增完成');
+                        vm.$bus.$emit('message:push','新增成功','success');
                         vm.getmissionOrder();
                     })
                     .catch((error) => {
@@ -264,7 +261,7 @@ export default {
                     });
                 }
 
-                alert('請修正錯誤');
+               vm.$bus.$emit('message:push','請修正錯誤');
             });
         }
     },
