@@ -26,10 +26,10 @@
                 <div class="form-group row">
                     <label for="" class="col-sm-4 col-form-label">主圖檔名</label>
                     <div class="col-sm-8">
-                    <input type="text" name="cover" class="form-control" id="cover" placeholder="主圖檔名 ex:example.jpg"
+                    <input type="file"  name="attachment[]" class="form-control" id="cover"  @change="filterFileName($event)" placeholder="主圖檔名 ex:example.jpg"
                     :class="{'is-invalid': errors.has('cover') }" 
-                    v-model.trim="mission.cover"
-                    v-validate="'required'">
+                    v-validate="'required'"
+                   >
                      <span v-show="errors.has('cover')" class="help invalid-feedback">{{ errors.first('cover') }}</span>
                       <small  class="text-primary">請輸入圖片所在位置的網址 尺寸：至少 800 x 600 圖片格式：JPG、PNG 檔案大小：1MB 內</small>
                     </div>
@@ -86,7 +86,7 @@
                         </select>
                         <label for="locations" class="col-sm-4 col-form-label">所選擇的標籤：</label>
                         <div class="col-sm-8">
-                            <span class="label" v-for="(item,index) in mission.locations" :key="index">{{item}} <em @click="removeLocations(index)">X</em></span>
+                            <span class="location-label" v-for="(item,index) in mission.locations" :key="index">{{item}}<em @click="removeLocations(index)">X</em></span>
                         </div>
                     </div>
                 </div>
@@ -207,6 +207,11 @@ export default {
         }
     },
     methods:{
+        filterFileName(event){
+            let vm = this;
+            var fileData = event.target.files[0]
+            vm.mission.cover = fileData.name
+        },
         getmissionOrder(){
              let vm = this;
             // 取得集合
@@ -259,9 +264,9 @@ export default {
                     .catch((error) => {
                         console.log("Error adding document: ", error);
                     });
+                }else{
+                    vm.$bus.$emit('message:push','請修正錯誤');
                 }
-
-               vm.$bus.$emit('message:push','請修正錯誤');
             });
         }
     },

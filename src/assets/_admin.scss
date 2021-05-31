@@ -27,3 +27,8 @@
         tbody{ height: 400px; }
     }
 }
+
+
+.location-label{ background-color: $primary; color:$light; font-size: 0.8em; border-radius: 3px; padding: 3px 5px; letter-spacing: 1px; margin-right: 8px;
+    em{ font-style: normal; color: lighten($primary, 45%); margin-left: 3px; padding: 0 3px; font-size: 0.4em; }
+}

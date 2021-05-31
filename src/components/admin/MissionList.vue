@@ -2,18 +2,29 @@
     <div>
         <h5>任務列表</h5>
        
-    <vue-good-table
-      :columns="columns"
-      :rows="missions">
-    
-     <template slot="table-row" slot-scope="props">
-      <span v-if="props.column.field == 'operate'">
-          <button type="button" class="btn btn-primary btn-sm" @click="showEditModel(props.row)">編輯</button>
-          <button type="button" class="btn btn-danger btn-sm">刪除</button>
-      </span>
-    </template>
-
-    </vue-good-table>
+        <vue-good-table
+            :columns="columns"
+            :rows="missions"
+            max-height="600px"
+            :fixed-header="true"
+            theme="polar-bear"
+            
+            :search-options="{
+                enabled: true,
+                trigger: 'enter',
+                placeholder: '搜尋表格',
+                
+            }">
+             <div slot="emptystate">
+                <p>資料載入中....</p>
+            </div>
+            <template slot="table-row" slot-scope="props">
+            <span v-if="props.column.field == 'operate'">
+                <button type="button" class="btn btn-primary btn-sm" @click="showEditModel(props.row)">編輯</button>
+                <button type="button" class="btn btn-danger btn-sm">刪除</button>
+            </span>
+            </template>
+        </vue-good-table>
 
         <!-- Modal -->
         <div class="modal fade " id="editMinnion" tabindex="-1" role="dialog" aria-labelledby="editMinnionTitle" aria-hidden="true">
@@ -56,9 +67,8 @@
                         <div class="form-group row">
                             <label for="" name="cover" class="col-sm-4 col-form-label">主圖檔名</label>
                             <div class="col-sm-8">
-                            <input type="text" class="form-control" name="cover" id="imgfilename" placeholder="主圖檔名 ex:example.jpg"
+                             <input type="file"  name="attachment[]" class="form-control" id="cover"  @change="filterFileName($event)" placeholder="主圖檔名 ex:example.jpg"
                             :class="{'is-invalid': errors.has('cover') }" 
-                            v-model="editItem.cover"
                             v-validate="'required'">
                              <small  class="text-primary">請輸入圖片所在位置的網址 尺寸：至少 800 x 600 圖片格式：JPG、PNG 檔案大小：1MB 內</small>
                             </div>
@@ -119,7 +129,7 @@
                                 </select>
                                 <label for="locations" class="col-sm-4 col-form-label">所選擇的標籤：</label>
                             <div class="col-sm-8">
-                                <span class="label" v-for="(location,index) in editItem.locations" :key="index">{{location}}<em @click="removeLocations(index)">X</em> </span>
+                                <span class="location-label" v-for="(location,index) in editItem.locations" :key="index">{{location}}<em @click="removeLocations(index)">X</em> </span>
                             </div>
                             </div>
                         </div>
@@ -243,10 +253,6 @@ export default {
                     field: 'company_name',
                 },
                 {
-                    label: '公司名稱',
-                    field: 'company_name',
-                },
-                {
                     label: '推薦星星',
                     field: 'recommend',
                 },
@@ -255,14 +261,14 @@ export default {
                     field: 'publish_start_date',
                     type: 'date',
                     dateInputFormat: 'yyyy-MM-dd',
-                    dateOutputFormat: 'MMM do yy',
+                    dateOutputFormat: 'yyyy-MM-dd',
                 },
                 {
                     label: '刊登結束',
                     field: 'publish_end_date',
                     type: 'date',
                     dateInputFormat: 'yyyy-MM-dd',
-                    dateOutputFormat: 'MMM do yy',
+                    dateOutputFormat: 'yyyy-MM-dd',
                 },
                 {
                     label: '上/下架',
@@ -288,6 +294,11 @@ export default {
        VueGoodTable,
    },
     methods:{
+         filterFileName(event){
+            let vm = this;
+            var fileData = event.target.files[0]
+            vm.editItem.cover = fileData.name
+        },
         showEditModel(item){
             console.log(item)
             this.editItem =Object.assign({},item);
@@ -331,7 +342,7 @@ export default {
         },
         getCollection(){
             let vm = this;
-            let docRef = db.collection("missions").orderBy("priority","asc");
+            let docRef = db.collection("missions").orderBy("priority","desc");
             let payload=[];
             docRef
             .get()
