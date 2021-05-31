@@ -1,37 +1,19 @@
 <template>
     <div>
         <h5>任務列表</h5>
-        <table class="table table-hover table-bordered">
-            <thead>
-                <tr>
-                    <th scope="col" width="10%">id</th>
-                    <th scope="col" width="10%">排序值</th>
-                    <th scope="col">任務標題</th>
-                    <th scope="col">公司名稱</th>
-                    <th scope="col">推薦星星</th>
-                    <th scope="col">刊登開始</th>
-                    <th scope="col">刊登結束</th>
-                    <th scope="col">上/下架</th>
-                    <th scope="col" width="10%">操作</th>
-                </tr>
-            </thead>
-            <tbody >
-                    <tr v-for="(item) in missions" :key="item.id"> 
-                    <td>{{item.id}}</td>
-                    <td>{{item.priority}}</td>
-                    <td>{{item.subject}}</td>
-                    <td>{{item.company_name}}</td>
-                    <td>{{item.recommend? "推薦":""}}</td>
-                    <td>{{item.subject_start_date}}</td>
-                    <td>{{item.subject_end_date}}</td>
-                    <td>{{item.enable == 1 ? "上架":"下架"}}</td>
-                    <td> <button type="button" class="btn btn-primary btn-sm" @click="showEditModel(item)">編輯</button>
-                        <button type="button" class="btn btn-danger btn-sm">刪除</button>
-                    </td>
-                </tr>
-                
-            </tbody>
-        </table>
+       
+    <vue-good-table
+      :columns="columns"
+      :rows="missions">
+    
+     <template slot="table-row" slot-scope="props">
+      <span v-if="props.column.field == 'operate'">
+          <button type="button" class="btn btn-primary btn-sm" @click="showEditModel(props.row)">編輯</button>
+          <button type="button" class="btn btn-danger btn-sm">刪除</button>
+      </span>
+    </template>
+
+    </vue-good-table>
 
         <!-- Modal -->
         <div class="modal fade " id="editMinnion" tabindex="-1" role="dialog" aria-labelledby="editMinnionTitle" aria-hidden="true">
@@ -228,6 +210,10 @@
 
 <script>
 import db from '../../firebase/firebase.js';
+import { VueGoodTable } from 'vue-good-table';
+
+
+
 
 export default {
     name:'MissionList',
@@ -237,9 +223,70 @@ export default {
             editId:0,
             editItem:{
                 locations:[],
-            }
+            },
+            columns: [
+                {
+                    label: 'id',
+                    field: 'id',
+                },
+                {
+                    label: '排序值',
+                    field: 'priority',
+                    type: 'number',
+                },
+                {
+                    label: '任務標題',
+                    field: 'subject',
+                },
+                {
+                    label: '公司名稱',
+                    field: 'company_name',
+                },
+                {
+                    label: '公司名稱',
+                    field: 'company_name',
+                },
+                {
+                    label: '推薦星星',
+                    field: 'recommend',
+                },
+                {
+                    label: '刊登開始',
+                    field: 'publish_start_date',
+                    type: 'date',
+                    dateInputFormat: 'yyyy-MM-dd',
+                    dateOutputFormat: 'MMM do yy',
+                },
+                {
+                    label: '刊登結束',
+                    field: 'publish_end_date',
+                    type: 'date',
+                    dateInputFormat: 'yyyy-MM-dd',
+                    dateOutputFormat: 'MMM do yy',
+                },
+                {
+                    label: '上/下架',
+                    field: 'enable',
+                    type: 'number',
+                },
+                {
+                    label: '操作',
+                    field: 'operate',
+                },
+            ],
+            rows: [
+                { id:1, name:"John", age: 20, createdAt: '',score: 0.03343 },
+                { id:2, name:"Jane", age: 24, createdAt: '2011-10-31', score: 0.03343 },
+                { id:3, name:"Susan", age: 16, createdAt: '2011-10-30', score: 0.03343 },
+                { id:4, name:"Chris", age: 55, createdAt: '2011-10-11', score: 0.03343 },
+                { id:5, name:"Dan", age: 40, createdAt: '2011-10-21', score: 0.03343 },
+                { id:6, name:"John", age: 20, createdAt: '2011-10-31', score: 0.03343 },
+            ],
         }
     },
+   components:{
+       VueGoodTable,
+   },
     methods:{
         showEditModel(item){
             console.log(item)
@@ -264,9 +311,9 @@ export default {
                         vm.getCollection();
                         vm.$bus.$emit('message:push',error);
                     });
+                }else{
+                    vm.$bus.$emit('message:push','請修正錯誤');
                 }
-
-                vm.$bus.$emit('message:push','請修正錯誤');
             });
         },
         addLocations(event){

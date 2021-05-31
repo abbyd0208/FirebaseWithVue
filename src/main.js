@@ -18,6 +18,13 @@ Vue.use(VeeValidate);
 
 window.$ = $
 
+import VueGoodTablePlugin from 'vue-good-table';
+
+// import the styles 
+import 'vue-good-table/dist/vue-good-table.css'
+
+Vue.use(VueGoodTablePlugin);
+
 
 // const bootstrap = require('bootstrap') 
 Vue.config.productionTip = false
