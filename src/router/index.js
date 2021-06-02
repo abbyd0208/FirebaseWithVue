@@ -13,35 +13,35 @@ Vue.use(Router);
 
 export default new Router({
   routes: [
-    {
-      path: "/",
-      name: "Home",
-      component: Home,
-      children: [
-        {
-          path: "product-list",
-          name: "ProductsList",
-          component: ProductsList
-        },
-        {
-          path: "about",
-          name: "About",
-          component: About
-        }
-      ]
-    },
+    // {
+    //   path: "/",
+    //   name: "Home",
+    //   component: Home,
+    //   children: [
+    //     {
+    //       path: "product-list",
+    //       name: "ProductsList",
+    //       component: ProductsList
+    //     },
+    //     {
+    //       path: "about",
+    //       name: "About",
+    //       component: About
+    //     }
+    //   ]
+    // },
 
     {
-      path: "/admin",
+      path: "/",
       name: "Dashboard",
       component: Dashboard,
       children: [
         {
-			path: "mission-list",
-			name: "MissionList",
-			component: MissionList
-		 },
-		{
+          path: "mission-list",
+          name: "MissionList",
+          component: MissionList
+        },
+        {
           path: "mission-add",
           name: "MissionAdd",
           component: MissionAdd

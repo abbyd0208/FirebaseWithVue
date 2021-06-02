@@ -74,6 +74,9 @@
                         
                     </tbody>
                 </table>
+                <vue-good-table
+                :columns="columns">
+                </vue-good-table>
         </div>
     </div>
 </template>
@@ -82,7 +85,32 @@
 export default {
     data(){
         return{
-            edit:false
+            edit:false,
+            columns:[
+                {
+                    label:'產業標籤',
+                    field:'id'
+                },
+                {
+                    label:'標籤語系',
+                    field:''
+                },
+                {   label:'簡體',
+                    field:'zh_cn'
+                },
+                {
+                    label:'繁中',
+                    field:'zh_tw'
+                },
+                {
+                    label:'英文',
+                    field:'en'
+                },
+                {
+                    label:'操作',
+                    field:'operate'
+                },
+            ]
         }
     },
     methods:{

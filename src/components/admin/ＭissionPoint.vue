@@ -43,11 +43,86 @@
                     </tbody>
                 </table>
 
+                 <vue-good-table
+                    :columns="columns"
+                    :rows="missions"
+                    max-height="600px"
+                    :fixed-header="true"
+                    theme="polar-bear"
+                    :search-options="{
+                        enabled: true,
+                        trigger: 'enter',
+                        placeholder: '搜尋表格',
+                        
+                    }">
+                    <div slot="emptystate">
+                        <p>資料載入中....</p>
+                    </div>
+                </vue-good-table>
+
     </div>
 </template>
 
 <script>
 export default {
-    name:'MissionPoint'
+    name:'MissionPoint',
+    data(){
+        return{
+            columns:[
+                 {
+                    label: 'id',
+                    field: 'id',
+                },
+                {
+                    label: '排序值',
+                    field: 'priority',
+                    type: 'number',
+                },
+                {
+                    label: '任務標題',
+                    field: 'subject',
+                },
+                {
+                    label: '類別',
+                    field: 'type',
+                },
+                {
+                    label: '類別',
+                    field: 'type',
+                },
+                {
+                    label: '上/下架',
+                    field: 'enable',
+                    type: 'number',
+                },
+            ]
+        }
+    },
+    methods:{
+        getCollection(){
+            let vm = this;
+            let docRef = db.collection("missions").orderBy("priority","desc");
+            let payload=[];
+            docRef
+            .get()
+            .then((doc) => {
+                doc.forEach(item =>{
+                    if (item.exists) {
+                        // 將集合的id與doc內的內容一起存進資料內
+                        payload.push({docId:item.id, ...item.data()}) 
+                        vm.missions = payload;
+                    } else {
+                        console.log("No such document!");
+                    }
+                })
+            }).catch((error) => {
+                console.log("Error getting document:", error);
+            });
+        }
+
+    },
+    created:{
+
+    }
 }
 </script>
