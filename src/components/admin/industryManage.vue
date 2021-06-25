@@ -2,99 +2,105 @@
     <div>
         <div class="container">
             <h5>產業標籤管理</h5>
-                <table class="table table-hover table-bordered">
-                    <thead>
-                        <tr>
-                            <th scope="col" width="20%">產業標籤id</th>
-                            <th scope="col" width="50%">標籤語系</th>
-                            <th scope="col" width="12%">操作</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                         <tr>
-                            <td>
-                                <div class="form-group">
-                                    <label for="industry_en">產業標籤</label>
-                                    <input type="text" class="form-control" id="industry_id" placeholder="請輸入產業標籤">
-                                    </div>
-                                    
-                            <td>
-                                <div class="form-row">
-                                    <div class="form-group col-md-4">
-                                    <label for="industry_en">en</label>
-                                        <input type="text" class="form-control" id="industry_en" placeholder="en">
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                    <label for="industry_zh_cn">zh_cn</label>
-                                        <input type="text" class="form-control" id="industry_zh_cn" placeholder="zh_cn">
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                    <label for="industry_zh_tw">zh_tw</label>
-                                        <input type="text" class="form-control" id="industry_zh_tw" placeholder="zh_tw">
-                                    </div>
-                                </div>
-                            </td>
-                        
-                            <td> <button type="button" class="btn btn-success btn-sm" @click="addIndustryLabel">新增</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>food</td>
-                            <td>
-                                <div class="form-row">
-                                    <div class="form-group col-md-4">
-                                    <label for="industry_en">en</label>
-                                        <p v-if="edit == false">food</p>
-                                        <input  type="text" class="form-control" id="industry_en" placeholder="en"
-                                            v-if="edit"  
-                                        >
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                    <label for="industry_zh_cn">zh_cn</label>
-                                        <p v-if="edit == false">食品業</p>
-                                        <input type="text" class="form-control" id="industry_zh_cn" placeholder="zh_cn"
-                                            v-if="edit"
-                                        >
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                    <label for="industry_zh_tw">zh_tw</label>
-                                        <p v-if="edit == false">食品業</p>
-                                         <input type="text" class="form-control" id="industry_zh_tw" placeholder="zh_tw"
-                                             v-if="edit"
-                                         >
-                                    </div>
-                                </div>
-                            </td>
-                        
-                            <td> <button type="button" class="btn btn-primary btn-sm" @click="editIndustryLabel(true)" v-if="edit==false">編輯</button>
-                                <button type="button" class="btn btn-success btn-sm" @click="saveIndustryLabel" v-if="edit">儲存</button>
-                                <button type="button" class="btn btn-danger btn-sm" @click="deleteIndustryLabel">刪除</button>
-                            </td>
-                        </tr>
-                        
-                    </tbody>
-                </table>
+            
+            <div class="d-flex justify-content-end mb-3 ">
+                <button type="button" class="btn btn-success btn-sm" @click="showModel(true)">新增</button>
+            </div>
+
                 <vue-good-table
-                :columns="columns">
+                    :columns="columns"
+                    :rows="tags"
+                    :search-options="{
+                            enabled: true,
+                            trigger: 'enter',
+                            placeholder: '搜尋表格',
+                            
+                        }"
+                    >
+                    <div slot="emptystate">
+                        <p>資料載入中....</p>
+                    </div>
+                     <template slot="table-row" slot-scope="props">
+                    <span v-if="props.column.field == 'operate'">
+                        <button type="button" class="btn btn-primary btn-sm" @click="showModel(false,props.row)">編輯</button>
+                        <button type="button" class="btn btn-danger btn-sm" @click="deleteIndustryTag(props.row)">刪除</button>
+                    </span>
+                    </template>
                 </vue-good-table>
+
+                <!-- 編輯 modal -->
+                <div class="modal fade" tabindex="-1" id="editTag" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" v-if="isNew">新增產業標籤</h5>
+                            <h5 class="modal-title" v-else>編輯產業標籤</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="form-group row">
+                                    <label for="industryId" class="col-sm-4 col-form-label">產業標籤</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="industryId"  placeholder="請填寫產業標籤"
+                                        v-model="editItem.docId">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="zhCn" class="col-sm-4 col-form-label">簡體</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="zhCn" placeholder="請填寫簡體"
+                                        v-model="editItem.zh_cn">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="zhTw" class="col-sm-4 col-form-label">繁體</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="zhTw" placeholder="填寫繁體"
+                                        v-model="editItem.zh_tw">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="en" class="col-sm-4 col-form-label">英文</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="en" placeholder="填寫英文"
+                                        v-model="editItem.en">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" @click="saveChange">儲存變更</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
         </div>
     </div>
 </template>
 
 <script>
+
+import db from '../../firebase/firebase.js';
+import { VueGoodTable } from 'vue-good-table';
+
 export default {
+    name:'IndustryManage',
     data(){
         return{
             edit:false,
+            tags:[],
+            editItem:{},
+            isNew:false,
             columns:[
                 {
                     label:'產業標籤',
-                    field:'id'
+                    field:'docId'
                 },
-                {
-                    label:'標籤語系',
-                    field:''
-                },
+               
                 {   label:'簡體',
                     field:'zh_cn'
                 },
@@ -113,23 +119,89 @@ export default {
             ]
         }
     },
+    components:{
+       VueGoodTable,
+   },
     methods:{
-        addIndustryLabel(){
-            alert('add')
-        },
+        getCollection (){
+            let vm = this;
+            let docRef = db.collection("industryTag");
+            let payload=[];
+            docRef
+            .get()
+            .then((doc) => {
+                doc.forEach(item =>{
+                    if (item.exists) {
+                        // 將集合的id與doc內的內容一起存進資料內
+                        payload.push({docId:item.id, ...item.data()}) 
+                        vm.tags = payload;
+                    } else {
+                        console.log("No such document!");
+                    }
+                })
+            }).catch((error) => {
+                console.log("Error getting document:", error);
+            });
 
+        },
+        showModel(isNew,item){
+            console.log(isNew)
+            if(isNew){
+                this.editItem = {};
+                this.isNew = true;
+            }else{
+                this.editItem = Object.assign({},item);
+                this.isNew = false;
+            }
+            $('#editTag').modal('show');
+        },
         editIndustryLabel(status){
             let vm = this;
             if(status){
                 vm.edit = true;
             }
         },
-        deleteIndustryLabel(){
-            alert('delete')
+        deleteIndustryTag(item){
+            db.collection("industryTag")
+            .doc(item.docId)
+            .delete()
+            .then(() => {
+                vm.$bus.$emit('message:push','刪除成功','success');
+                this.getCollection();
+            }).catch((error) => {
+                console.error("Error removing document: ", error);
+            });
         },
-        saveIndustryLabel(){
-            alert('save')
+        saveChange(){
+            let vm = this;
+            if(this.isNew){
+                db.collection("industryTag")
+                .add(vm.editItem)
+                .then((docRef) => {
+                    $('#editTag').modal('hide');
+                    vm.getCollection();
+                    vm.$bus.$emit('message:push','新增成功','success');
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+            }else{
+                db.collection("industryTag")
+                .doc(vm.editItem.docId)
+                .update(vm.editItem)
+                .then(function() {
+                    $('#editTag').modal('hide');
+                    vm.getCollection();
+                    vm.$bus.$emit('message:push','更新成功','success');
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+            }
         }
+    },
+    created(){
+        this.getCollection();
     }
 }
 </script>

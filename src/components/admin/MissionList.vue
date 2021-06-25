@@ -223,8 +223,6 @@ import db from '../../firebase/firebase.js';
 import { VueGoodTable } from 'vue-good-table';
 
 
-
-
 export default {
     name:'MissionList',
     data(){

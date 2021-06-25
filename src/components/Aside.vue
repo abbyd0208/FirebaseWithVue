@@ -13,7 +13,6 @@
              <div class="list-group">
                <h5>產業標籤管理</h5>
                 <router-link class="item-link"  to="/industry-manage">產業標籤管理</router-link>
-               <a class="item-link" href="#">標籤列表</a>
             </div>
         </aside>
     </div>

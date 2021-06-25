@@ -29,6 +29,10 @@ export default {
         Aside,
         Alert
     },
+    created(){
+        // this.$router.push('/mission-list')
+        // todo:路由重复解决 Error: Avoided redundant navigation to current location
+    }
     
 }
 
