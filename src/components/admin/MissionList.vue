@@ -138,11 +138,11 @@
                             <div class="col-sm-8">
                                 <select class="form-control" 
                                 v-model="editItem.industryTag">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
+                                    <option value="">請選擇</option>
+                                    <option v-for="item in industry" 
+                                        :key="item.docId"
+                                        :value="item.docId">{{item.zh_tw}}
+                                    </option>
                                 </select>
                             </div>
                         </div>
@@ -232,6 +232,7 @@ export default {
             editItem:{
                 locations:[],
             },
+            industry:[],
             columns: [
                 {
                     label: 'id',
@@ -292,7 +293,6 @@ export default {
         showEditModel(item){
             console.log(item)
             this.editItem =Object.assign({},item);
-
             $('#editMinnion').modal('show');
         },
         validateBeforeSubmit(){
@@ -330,9 +330,9 @@ export default {
             let vm = this;
             vm.editItem.locations.splice(index,1)
         },
-        getCollection(){
+        getCollection(collection = 'missions'){
             let vm = this;
-            let docRef = db.collection("missions").orderBy("priority","desc");
+            let docRef = db.collection(collection).orderBy("priority","desc");
             let payload=[];
             docRef
             .get()
@@ -349,10 +349,32 @@ export default {
             }).catch((error) => {
                 console.log("Error getting document:", error);
             });
+        },
+        getIndustry(){
+            let vm = this;
+            let docRef = db.collection('industryTag');
+            let payload=[];
+
+            docRef
+            .get()
+            .then((doc) => {
+                doc.forEach(item =>{
+                    if (item.exists) {
+                        // 將集合的id與doc內的內容一起存進資料內
+                        payload.push({docId:item.id, ...item.data()}) 
+                        vm.industry = payload;
+                    } else {
+                        console.log("No such document!");
+                    }
+                })
+            }).catch((error) => {
+                console.log("Error getting document:", error);
+            });
         }
     },
     created(){
         this.getCollection();
+        this.getIndustry();
         
     }
 }

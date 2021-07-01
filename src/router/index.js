@@ -13,24 +13,11 @@ Vue.use(Router);
 
 export default new Router({
   routes: [
-    // {
-    //   path: "/",
-    //   name: "Home",
-    //   component: Home,
-    //   children: [
-    //     {
-    //       path: "product-list",
-    //       name: "ProductsList",
-    //       component: ProductsList
-    //     },
-    //     {
-    //       path: "about",
-    //       name: "About",
-    //       component: About
-    //     }
-    //   ]
-    // },
-
+    // 讓一進來預設導頁到MissionList
+    {
+      path: "/",
+      redirect:'/mission-list'
+    },
     {
       path: "/",
       name: "Dashboard",

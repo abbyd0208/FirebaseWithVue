@@ -95,11 +95,9 @@
                     <div class="col-sm-8">
                         <select class="form-control" 
                         v-model="mission.industryTag">
-                            <option value="food">food</option>
-                            <option value="medical">medical</option>
-                            <option value="">3</option>
-                            <option value="">4</option>
-                            <option value="">5</option>
+                            <option value="">請選擇</option>
+                            <option :value="item.docId"
+                            v-for="item in industry" :key="item.docId">{{item.zh_tw}}</option>
                         </select>
                     </div>
                 </div>
@@ -204,6 +202,7 @@ export default {
                 recommend:0,
                 priority:null
             },
+            industry:[]
         }
     },
     methods:{
@@ -212,19 +211,24 @@ export default {
             var fileData = event.target.files[0]
             vm.mission.cover = fileData.name
         },
-        getmissionOrder(){
+        getCollection(collection = 'missions'){
              let vm = this;
             // 取得集合
-            let docRef = db.collection("missions");
-        
+            let docRef = db.collection(collection);
+            let payload=[]
             // 取得檔案
             docRef
             .get()
             .then((doc) => {
                 doc.forEach(item =>{
-                    console.log(item)
                     if (item.exists) {
-                        vm.mission.priority = item.data().id +1;
+                        
+                        if(collection == 'missions'){
+                            vm.mission.priority = item.data().id +1;
+                        }else{
+                            payload.push(item.data())
+                            vm.industry = payload;
+                        }
                         
                     } else {
                         console.log("No such document!");
@@ -259,7 +263,7 @@ export default {
                     .then((docRef) => {
                         console.log("Document written with ID: ", docRef.id);
                         vm.$bus.$emit('message:push','新增成功','success');
-                        vm.getmissionOrder();
+                        vm.getCollection();
                     })
                     .catch((error) => {
                         console.log("Error adding document: ", error);
@@ -271,7 +275,8 @@ export default {
         }
     },
     created(){
-       this.getmissionOrder()
+       this.getCollection();
+       this.getCollection('industryTag');
     }
 }
 </script>
