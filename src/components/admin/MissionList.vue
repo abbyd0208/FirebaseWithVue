@@ -219,7 +219,7 @@
 </template>
 
 <script>
-import db from '../../firebase/firebase.js';
+import {db} from '../../firebase/firebase.js';
 import { VueGoodTable } from 'vue-good-table';
 
 

@@ -41,13 +41,7 @@
                             </div>
                             <div class="modal-body">
                                 <form>
-                                    <!-- <div class="form-group row">
-                                        <label for="industryId" class="col-sm-4 col-form-label">產業標籤</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" id="industryId"  placeholder="請填寫產業標籤"
-                                            v-model="editItem.docId">
-                                        </div>
-                                    </div> -->
+                                   <input type="hidden" class="form-control" id="industryId"  placeholder="請填寫產業標籤" :value="transToId2" >
                                     <div class="form-group row">
                                         <label for="zhCn" class="col-sm-3 col-form-label">簡體</label>
                                         <div class="col-sm-9">
@@ -87,7 +81,7 @@
 
 <script>
 
-import db from '../../firebase/firebase.js';
+import {db} from '../../firebase/firebase.js';
 import { VueGoodTable } from 'vue-good-table';
 
 export default {
@@ -128,8 +122,14 @@ export default {
     },
     computed:{
         transToId2(){
-            if(editItem.en){
+            let vm = this;
+            let trans = '';
+
+            if(vm.editItem.en){
                 // todo 我只要把輸入進去的value去做判斷就好，其他不用想
+                trans = vm.editItem.en.toLowerCase().replace(/\s+/g,"_")
+                vm.editItem.docId = trans;
+                return trans
             }
         }
     },

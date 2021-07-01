@@ -7,7 +7,7 @@ import firebase from "firebase/app";
 // import "firebase/analytics";
 
 // Add the Firebase products that you want to use
-// import "firebase/auth";
+import "firebase/auth";
 import "firebase/firestore";
 
 
@@ -26,8 +26,8 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 const db = firebase.firestore();
-
-export default db
-// export {
-// 	db
-// }
+const fb = firebase.auth();
+// export default db ,
+export {
+	db,fb
+}
