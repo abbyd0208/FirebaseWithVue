@@ -6,7 +6,7 @@ import MissionList from "@/components/admin/MissionList";
 import MissionAdd from "@/components/admin/MissionAdd";
 import MissionPoint from "@/components/admin/ＭissionPoint";
 import IndustryManage from "@/components/admin/IndustryManage";
-
+import UserAdmin from "@/components/admin/User.vue"
 
 Vue.use(Router);
 
@@ -22,30 +22,40 @@ export default new Router({
       path: "/",
       redirect:'/login'
     },
+   
     {
       path: "/",
       name: "Dashboard",
       component: Dashboard,
       children: [
         {
+          path: '/user-admin',
+          name: 'adminAdmin',
+          component: UserAdmin
+        },
+        {
           path: "mission-list",
           name: "MissionList",
-          component: MissionList
+          component: MissionList,
+          meta: { requiresAuth: true }
         },
         {
           path: "mission-add",
           name: "MissionAdd",
-          component: MissionAdd
+          component: MissionAdd,
+          meta: { requiresAuth: true }
         },
         {
           path: "mission-point",
           name: "MissionPoint",
-          component: MissionPoint
+          component: MissionPoint,
+          meta: { requiresAuth: true }
         },
         {
           path: "industry-manage",
           name: "IndustryManage",
-          component: IndustryManage
+          component: IndustryManage,
+          meta: { requiresAuth: true }
         }
       ]
     }

@@ -1,8 +1,9 @@
 <template>
     <div class="admin">
         <Alert></Alert>
-        <header>
+        <header class="d-flex justify-content-between">
             <h4>任務旋轉門後台</h4>
+            <a class="btn btn-light" href="#" @click="signOut">登出</a>
         </header>
          <Aside></Aside>
         <div class="container-fluid">
@@ -17,6 +18,7 @@
 <script>
 import Aside from'./Aside';
 import Alert from'./AlertMessage';
+import {fb}  from '../firebase/firebase.js';
 
 export default {
     name:'Dashboard',
@@ -29,9 +31,24 @@ export default {
         Aside,
         Alert
     },
-    created(){
-        // this.$router.push('/mission-list')
-        // todo:路由重复解决 Error: Avoided redundant navigation to current location
+    methods:{
+        
+        signOut(){
+            let vm = this;
+            fb.signOut();
+            const user = fb.currentUser;
+
+            if (user) {
+                console.log(user)
+                // User is signed in, see docs for a list of available properties
+                // https://firebase.google.com/docs/reference/js/firebase.User
+                // ...
+            } else {
+                console.log('登出')
+                // No user is signed in.
+            }
+            // vm.$router.push('/login');
+        }
     }
     
 }

@@ -14,6 +14,7 @@
 
 <script>
 import {fb}  from '../firebase/firebase.js';
+import Alert from'./AlertMessage';
 // console.log(fb)
 export default {
   name: 'HelloWorld',
@@ -25,41 +26,33 @@ export default {
       }
     }
   },
+  components:{
+    Alert
+  },
   methods:{
     signin(){
-	var vm = this;
-		console.log(fb)
-	fb.signInWithEmailAndPassword(this.user.username, this.user.password)
-	.then((userCredential) => {
-		// Signed in
-		var user = userCredential.user;
-		console.log(user)
-		vm.$router.push('/mission-list');
-		// ...
-	})
-	.catch((error) => {
-		var errorCode = error.code;
-		var errorMessage = error.message;
-		console.log(errorCode)
-		console.log(errorMessage)
-	});
-
-
-
-
-
-    //   var vm = this;
-    //   const api = `${process.env.APIPATH}/admin/signin`;
-    //   this.$http.post(api,vm.user).then((response) => {
-    //     console.log(response.data);
-    //     if (response.data.success){
-    //      
-    //     }else{
-    //       alert('帳號或密碼錯誤')
-    //     }
-    //   });
-
-
+      let vm = this;
+      
+      fb.signInWithEmailAndPassword(this.user.username, this.user.password)
+      .then((userCredential) => {
+        // Signed in
+        var user = userCredential.user;
+        // console.log(user)
+        vm.$router.push('/mission-list');
+        // ...
+      })
+      .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.log(errorMessage)
+        // 可能錯誤：
+        // auth/invalid-email email 不符規定
+        // auth/user-disabled 該 email 已被停用
+        // auth/user-not-found 找不到該使用者
+        // auth/wrong-password 密碼錯誤
+        alert(errorMessage)
+        vm.$bus.$emit('message:push',errorMessage,'danger');
+      });
 
     }
   }
