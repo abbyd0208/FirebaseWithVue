@@ -1,7 +1,11 @@
 @import "~bootstrap/scss/functions";
 @import"./helper/variables";
 @import "~bootstrap/scss/bootstrap";
+
 @import "./global";
+@import "./part";
+@import "./page";
+@import "./layout";
 @import "./style";
 @import "./admin";
 

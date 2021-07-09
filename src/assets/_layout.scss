@@ -1,0 +1,123 @@
+body.mission{
+    background: url(./assets/images/mission_deco.png) no-repeat left bottom / 65%;
+}
+
+.wrapper{ overflow: hidden; }
+
+.header{
+    border-top: 4px solid $greenLight;
+   border-bottom: 1px solid #eee;
+   margin-bottom: 30px;
+    .inner{ max-width: 1400px; margin: 0 auto; padding: 0 15px; height: 82px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .logo{
+        width: 150px; height: 33px;
+        background: url(./assets/images/logo_cilclelinks.png) no-repeat center/contain;
+        a{ display: inline-block; width: 150px; height: 33px; text-indent: -300%; overflow: hidden; }
+    }
+    .menu{
+        a{  display:inline-block; margin-right:30px; 
+            // $size,$weight:300,$color,$spacing
+            @include text(16px,400,$black,2px);
+            position: relative;
+        }
+        .router-link-active{ 
+            //  &::after{ display: block; width: 12px; height: 4px; content: ''; position: absolute; left: 50%; bottom: -10px; transform: translateX(-50%); background: $greenLight;}   
+            color: $greenDark;
+        }    
+    }
+
+    .side_open{ display: none; cursor: pointer;
+        .fa-bars{ font-size: 21px; color: $greenLight;}
+    }
+    @include media-breakpoint-down(md){
+        .inner{ height: 60px; justify-content: space-between;}
+        .logo{ width: 100px;}
+        .menu{ display: none;}
+        .side_open{ display: block;}
+    }
+
+}
+
+.container{
+    min-height: 85vh;
+    margin-bottom: 50px;
+   
+}
+
+.footer{
+    height:44px; line-height: 44px;
+    border-top: 1px solid #eee;
+    background: #fff;
+    text-align: center;
+    p{ @include text(13px,300,#666,1px) }
+}
+
+
+.side{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 110;
+    transform: perspective(300px) rotateY(270deg) translateZ(0px); 
+    background: $greenLight;
+    transform-origin: right;
+    transition: transform .8s;
+    visibility: hidden;
+    overflow: hidden;
+    .inner{
+        display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
+            padding-top: 50px;
+        a{ display: block; margin-bottom: 30px;
+            @include text(18px,300,#FFF,4px);
+            }
+    }
+    .side_clode{
+        width: 40px; height: 40px;display: flex; justify-content: center; align-items: center; position: absolute; right: 15px; top: 15px; cursor: pointer; text-align:center ;
+        .fa-times{ color: #fff; font-size: 24px;}
+    }
+    &.active{
+        visibility: visible;
+        transform: perspective(300px) rotateY(360deg) translateZ(2px); 
+    }
+    
+}
+
+.apply_btn{ width: 48px; height: 160px; line-height: 48px; 
+    text-align: center; background: $blue; color: $white; position: fixed; right: 0; top: 300px; -webkit-writing-mode: vertical-lr;
+    writing-mode: vertical-lr; 
+    @include text(16px,300,$white,10px);
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+    .fa-arrow-alt-circle-right{ display: inline-block; font-size: 24px; margin-left: 5px; margin-top: -10px;}
+
+    &::after{ display: block; content: ''; width: 0;
+        height: 0;
+        border: 25px solid;
+        border-color: $greenDark $greenDark transparent transparent; position: absolute; left: 0; bottom: -50px; }
+    &:hover{
+        background: darken($color: $blue, $amount: 5);
+    }
+    @include media-breakpoint-down(sm){
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        -webkit-writing-mode: unset;  width: 48px; height: 48px; border-radius: 50%; line-height: 1.6; overflow: hidden;
+        font-size: 13px; letter-spacing: 0px; vertical-align: middle; top:auto; bottom: 40px; right: 10px;
+        transition: .3s;  transition-delay: .2s;
+        .fa-arrow-alt-circle-right{ display: none;}
+        &::after{ display: none;}
+        box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+    }
+
+}
+
+
+.gototop{ width: 48px; height: 48px; background: $greenLight; text-align: center; line-height: 48px; color: $white; border-radius: 50%; position: fixed; right: 10px; bottom: 0px; box-shadow: 0px 0px 10px rgba(0,0,0,0.3); opacity: 0; transition: .5s; cursor: pointer;}
