@@ -73,6 +73,7 @@
                     <label for="locations" class="col-sm-4 col-form-label">需求地區標籤 (最多3個)</label>
                     <div class="col-sm-8">
                         <select class="form-control" @change="addLocations($event)" >
+                            <option value="" defult >請選擇</option>
                             <option value="台灣">台灣</option>
                             <option value="中國">中國</option>
                             <option value="香港">香港</option>
@@ -95,7 +96,7 @@
                     <div class="col-sm-8">
                         <select class="form-control" 
                         v-model="mission.industryTag">
-                            <option value="">請選擇</option>
+                            <option value="" disabled="disabled">請選擇</option>
                             <option :value="item.docId"
                             v-for="item in industry" :key="item.docId">{{item.zh_tw}}</option>
                         </select>
@@ -200,7 +201,6 @@ export default {
                 locations:[],
                 enable:0,
                 recommend:0,
-                priority:null
             },
             industry:[]
         }
@@ -214,21 +214,20 @@ export default {
         getCollection(collection = 'missions'){
              let vm = this;
             // 取得集合
-            let docRef = db.collection(collection);
+            let docRef =  db.collection(collection).orderBy("id");
             let payload=[]
             // 取得檔案
             docRef
             .get()
             .then((doc) => {
+              
                 doc.forEach(item =>{
                     if (item.exists) {
-                        
-                        if(collection == 'missions'){
-                            vm.mission.priority = item.data().id +1;
-                        }else{
-                            payload.push(item.data())
-                            vm.industry = payload;
-                        }
+                        console.log(item.data().id)
+                            
+                        // vm.$set( target, propertyName/index, value )
+                        vm.$set(vm.mission,'id',item.data().id +1)
+                        vm.$set(vm.mission,'priority',item.data().id +1)
                         
                     } else {
                         console.log("No such document!");
@@ -238,8 +237,28 @@ export default {
             }).catch((error) => {
                 console.log("Error getting document:", error);
             });
-        }
-        ,
+        },
+        getCollectionIndustry(){
+             let vm = this;
+            // 取得集合
+            let docRef =  db.collection('industryTag');
+            let payload=[]
+            // 取得檔案
+            docRef
+            .get()
+            .then((doc) => {
+                // console.log(doc)
+                doc.forEach(item =>{
+                    if (item.exists) {
+                        payload.push(item.data())
+                        vm.industry = payload;
+                    } 
+                })
+                
+            }).catch((error) => {
+                console.log("Error getting document:", error);
+            });
+        },
         addLocations(event){
             let vm = this;
             if(vm.mission.locations.length == 3){
@@ -263,7 +282,11 @@ export default {
                     .then((docRef) => {
                         console.log("Document written with ID: ", docRef.id);
                         vm.$bus.$emit('message:push','新增成功','success');
+
                         vm.getCollection();
+                        // 新增成功後清空 this.mission 的內容
+                        Object.keys(vm.mission).forEach(key => vm.mission[key]= '');
+                       
                     })
                     .catch((error) => {
                         console.log("Error adding document: ", error);
@@ -276,7 +299,7 @@ export default {
     },
     created(){
        this.getCollection();
-       this.getCollection('industryTag');
+       this.getCollectionIndustry();
     }
 }
 </script>

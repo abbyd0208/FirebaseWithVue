@@ -37,9 +37,7 @@ export default {
       .then((userCredential) => {
         // Signed in
         var user = userCredential.user;
-        // console.log(user)
-        vm.$router.push('/mission-list');
-        // ...
+        vm.$router.push('/admin/mission-list');
       })
       .catch((error) => {
         var errorCode = error.code;
@@ -53,7 +51,6 @@ export default {
         alert(errorMessage)
         vm.$bus.$emit('message:push',errorMessage,'danger');
       });
-
     }
   }
 }

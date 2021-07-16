@@ -8,6 +8,11 @@
     color:$greenDark; padding: 5px 8px; width:50px; background:$greenLiter; border: 1px solid $greenLight; border-radius: 2px; margin-right: 10px; font-size: 14px; letter-spacing: 2px; word-wrap:break-word;
     } 
 }
+// 滿版背景
+._full{
+   
+    background: linear-gradient(180deg, rgba(77, 198, 201, 0.1) 0%, rgba(232, 245, 255, 0) 100%);
+ }
 
 // 按鈕的mixin
 @mixin btn_solid ($bgColor:$greenLight){
@@ -89,6 +94,7 @@
 // 主題標題
 .subject_title{
     // width: 364px; height: 106px;
+    max-width: 1320px; margin: 0 auto;
     position: relative; left: -100px; margin-bottom: 50px;
     img{ height: 106px; position: absolute; left: 0; top: 0; }
     h2{
@@ -135,8 +141,7 @@
 }
 
 .unit_title{ 
-    text-align: center; margin: 30px auto;
-    // $size,$weight:300,$color,$spacing
+    text-align: center; margin: 40px auto; padding-top: 40px;
     @include text(24px,400,$blue,8px);
     &::before{ display: inline-block; content: ''; width: 30px; height: 30px; background: url(./assets/images/sparks.png) no-repeat left bottom; background-size: contain; margin-bottom: 10px; margin-right: -4px;}
 
@@ -151,9 +156,10 @@
 }
 
 .card_list_1{
-    display: flex; justify-content: space-evenly; text-align: center;
+    max-width: 1320px; margin: 0 auto;
+    display: flex; flex-wrap: wrap; text-align: center;
     .card{
-        width: 22%; padding: 15px; display: flex; flex-direction: column; border-radius: 3px; position: relative;
+        width: 24%; margin-right: 1%; padding: 15px; display: flex; flex-direction: column; border-radius: 3px; position: relative;
         box-shadow: 0px 8px 10px rgba($color: $black, $alpha: 0.2);
         
         h5{
@@ -172,6 +178,7 @@
             // $size,$weight:300,$color,$spacing
             @include text(16px,300,$black,0px);
             margin-bottom: 10px;
+            min-height: 56px;
         }
         a{ align-self:flex-end;  
             // $size,$weight:300,$color,$spacing
@@ -202,7 +209,7 @@
         &.company{
             align-items: flex-start;
             line-height: 1.8; letter-spacing: 1px; font-weight: 300;
-            h5{ margin-top: -8px;}
+            h5{}
         }
         h4{ font-weight: 500; margin-bottom: 8px;}
     }
@@ -321,4 +328,32 @@
         }
     }
 
+}
+
+.filter_box{
+    max-width: 1320px; margin: 0 auto; 
+    .item{}
+    ul{
+        display: flex;
+    }
+    li{
+        margin: 0 10px;
+        a{
+            text-decoration: none;
+            border:2px solid $blue; 
+
+            @include btn_solid( #fff ); // 按鈕的mixin
+            color: $primary;
+            padding:3px 10px;
+            
+            &.active{
+                background-color: $blue;
+                color: #fff;
+            }
+            &:hover{
+                background-color: lighten($color: $blue, $amount: 15);
+                color: $white;
+            }
+        }
+    }
 }

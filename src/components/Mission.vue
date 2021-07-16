@@ -2,20 +2,23 @@
     <div>
         <Header></Header>
         <div class="wrapper">
+            <div class="subject_title">
+                <img src="../assets/images/subject_title_img.png" alt="">
+                <h2>任務旋轉門</h2>
+                <p>發掘解決方案和潛在夥伴</p>
+            </div>
+            
             <div class="container"  v-if="page" >
-                <div class="subject_title">
-                    <img src="../assets/images/subject_title_img.png" alt="">
-                    <h2>任務旋轉門</h2>
-                    <p>發掘解決方案和潛在夥伴</p>
-                </div>
-                <div class="subject_content mission" :class="{'recommend':page.recommend == 1, 'expired':  date > new Date(page.publish_end_date)}">
+                <div  class="subject_content mission" 
+                :class="{'recommend':page.recommend == 1, 'expired':  date > new Date(page.publish_end_date)}"
+                v-if="page">
                     <div class="row">
                         <div class="col-12">
                             <div class="breadcrumb"><a href="missions.htm">任務列表</a><span>{{page.subject}}</span></div>
                         </div>
                         <div class="col-12 col-md-4 mr-lg-5">
                             <div class="cover">
-                                <img :src="'../assets/images/cover/'+page.cover" alt="">
+                                <!-- <img :src="imgSrc" alt=""> -->
                             </div>
                         </div>
                         <div class="col-12 col-md-7">
@@ -109,9 +112,10 @@ export default {
         Header
     },
     computed:{
-        // userId(){
-        //     return this.$route.params.missionId
-        // }
+     
+        imgSrc(){
+            return require(`@/assets/images/cover/${this.page.cover}`)
+        }
     },
     watch:{
 
@@ -146,30 +150,11 @@ export default {
                 console.log("Error getting document:", error);
             });
         }
-
     },
     created(){
         console.log(this.$route.params.missionId);
         this.userId = this.$route.params.missionId;
         this.getCollction();
-    
-        // let nowPage = window.location.hash.split('#')[1];
-        // let vm = this;
-
-        // axios.get('./src/js/data.json').then((response)=>{
-        //     let data = response.data;
-        //     let nowData = data.filter((item,index)=>{
-        //         if(item.id == nowPage){
-        //             return true
-        //         }
-        //     });
-        
-        //     vm.page = nowData[0];
-
-        // }).catch((response) => {
-        //     /* 失敗，發生錯誤*/
-        //     console.log(response);
-        // });
     }
 }
 </script>

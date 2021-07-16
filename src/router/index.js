@@ -21,8 +21,8 @@ export default new Router({
       path: "/",
       redirect:'/About'
     },
-	 // 讓一進來預設導頁到MissionList
-	 {
+	// 讓一進來預設導頁到MissionList
+	{
 		path: "/admin",
 		redirect:'/login'
 	  },
@@ -81,7 +81,7 @@ export default new Router({
 			meta: { requiresAuth: true }
         },
 		{
-			path:'/:patchMach(.*)*',
+			path:'*',
 			name:'Notfound,',
 			component:NotFound
 		}
