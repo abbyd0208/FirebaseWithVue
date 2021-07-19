@@ -24,6 +24,7 @@
     "vue-good-table": "^2.21.10",
     "vue-i18n": "^9.1.7",
     "vue-loading-overlay": "^3.4.2",
+    "vue-meta": "^2.4.0",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {

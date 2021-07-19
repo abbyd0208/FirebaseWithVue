@@ -221,9 +221,10 @@
 
 
 .card_list_2{
-    display: flex;  flex-wrap: wrap;
+    display: flex;  flex-wrap: wrap;  align-items: stretch;
     .card{
-        width: 30%; margin:0 1.5% 2% 1.5%; padding: 12px; border-radius: 3px; overflow: hidden; position: relative;
+        &:not(:nth-of-type(4n)){ margin-right: 1%;}
+        width: 24%; padding: 12px; border-radius: 3px; overflow: hidden; position: relative;
         box-shadow: 0px 0px 10px rgba(0,0,0,0.1);  margin-bottom: 30px;
         display: flex; flex-direction: column; justify-content: space-between;
         .cover{ 
@@ -274,11 +275,23 @@
     }
 
     @include media-breakpoint-down(lg){
-        .card{ width: 48%; margin:0 1% 5% 1%;}
+        
+        .card{ width: 32%; 
+            &:not(:nth-of-type(4n)){ margin-right: 0%;}
+            &:not(:nth-of-type(3n)){ margin-right: 2%;}
+        }
+    }
+
+    @include media-breakpoint-down(md){
+        
+        .card{ width: 48%; 
+            &:not(:nth-of-type(3n)){ margin-right: 0%;}
+            &:not(:nth-of-type(2n)){ margin-right: 4%;}
+        }
     }
 
     @include media-breakpoint-down(sm){
-        .card{ width: 100%;  margin:0 1% 5% 1%;}
+        .card{ width: 100%;  &:not(:nth-of-type(2n)){ margin-right: 0%;}}
     }
 }
 
@@ -331,13 +344,14 @@
 }
 
 .filter_box{
-    max-width: 1320px; margin: 0 auto; 
+  margin-bottom: 30px;
     .item{}
     ul{
         display: flex;
     }
     li{
-        margin: 0 10px;
+        &:not(:nth-last-of-type(1)){ margin-right: 10px;}
+        // margin: 0 10px;
         a{
             text-decoration: none;
             border:2px solid $blue; 

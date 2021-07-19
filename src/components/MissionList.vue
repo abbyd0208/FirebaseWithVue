@@ -7,19 +7,6 @@
             <h2>任務旋轉門</h2>
             <p>發掘解決方案和潛在夥伴</p>
         </div>
-        <div class="filter_box">
-            <div class="item">
-                <h6>產業標籤</h6>
-                <ul>
-                    <li>
-                        <a href="#" class="active" @click=" currentTag = true">全部</a>
-                    </li>
-                    <li v-for="item in industryTag" :key="item.docId">
-                        <a href="#" @click="filterMission(item)">{{item.zh_tw}}</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
         <section class="_full">
             <h4 class="unit_title">焦點</h4>
             <!-- new最新上線 point重點任務 soon即將結束-->
@@ -38,12 +25,28 @@
         </section>
 
         <div class="container">
+   
             <div class="subject_content missions" v-if="list">
                 <h4 class="unit_title">任務</h4>
                 <p class="note">此標記為CiRCLELiNKS會員所發布的任務。歡迎踴躍回應！</p>
+
+                <div class="filter_box">
+                    <div class="item">
+                        <h6>產業標籤</h6>
+                        <ul>
+                            <li>
+                                <a href="#" class="active" @click.prevent=" currentTag = true">全部</a>
+                            </li>
+                            <li v-for="item in industryTag" :key="item.docId">
+                                <a href="#" @click.prevent="filterMission(item)">{{item.zh_tw}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
                 <ul class="card_list_2">
                     <li class="card mission" v-for="item in filterMissionEnable" 
-                        v-show="currentTag == true ?  true : currentTag == item.industryTag "
+                        v-show="currentTag == true ?  true : currentTag == item.industryTag"
                         :key="item.id"  
                         :data-id="item.id" 
                         :class="{'recommend':item.recommend == 1,'expired': date > new Date(item.publish_end_date) }" 
@@ -80,7 +83,7 @@
                                 <router-link :to="`/mission/${item.docId}`" class="btn_1">看更多</router-link>
                             </span>
                             <span>
-                                <small>刊登截止日 {{item.publish_end_date}}</small>
+                                <small>刊登截止日<br> {{item.publish_end_date}}</small>
                                 <a class="btn_2" href="https://forms.gle/CQGu1ahdt4jgZMDr5" target="_blank">我有興趣</a>
                             </span>
                         </div>
@@ -114,7 +117,10 @@ export default {
     components:{
         Header
     },
-
+    metaInfo: {
+        // title will be injected into parent titleTemplate
+        title: 'CiRCLELiNKS 任務旋轉門-任務列表',
+    },
     computed:{
        filterMissionEnable(){
            return this.list && this.list.filter((item)=>{

@@ -47,7 +47,7 @@
                                 <div class="item company">
                                     <i class="fas fa-briefcase"></i>
                                     <div>
-                                        <h5 v-if="page.company_name">{{page.company_name}}</h5>
+                                        <h5 v-if="page.show_company_name">{{page.company_name}}</h5>
                                         <p>{{page.company_intro}}</p>
                                     </div>
                                 </div>
@@ -105,20 +105,22 @@ export default {
             date:new Date(),
             url:window.location.href,
             copy:false,
-            userId:''
+            userId:'',
         }
     },
     components:{
         Header
+    },
+    metaInfo(){
+        return{
+            title: `CiRCLELiNKS 任務旋轉門-${this.page.subject}`,
+        }
     },
     computed:{
      
         imgSrc(){
             return require(`@/assets/images/cover/${this.page.cover}`)
         }
-    },
-    watch:{
-
     },
     methods:{
         copyLink(){

@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
+import VueMeta from 'vue-meta';
 import About from "@/components/About";
 import Missions from "@/components/MissionList";
 import Mission from "@/components/Mission";
@@ -12,6 +13,7 @@ import IndustryManage from "@/components/admin/IndustryManage";
 import UserAdmin from "@/components/admin/User.vue"
 import NotFound from "@/components/NotFound.vue"
 Vue.use(Router);
+Vue.use(VueMeta);
 
 export default new Router({
   routes: [
@@ -54,31 +56,32 @@ export default new Router({
         {
 			path: 'user-admin',
 			name: 'adminAdmin',
-			component: UserAdmin
+			component: UserAdmin,
+			meta: { requiresAuth: true}
         },
         {
 			path: "mission-list",
 			name: "MissionList",
 			component: MissionList,
-			meta: { requiresAuth: true }
+			meta: { requiresAuth: true}
         },
         {
 			path: "mission-add",
 			name: "MissionAdd",
 			component: MissionAdd,
-			meta: { requiresAuth: true }
+			meta: { requiresAuth: true}
         },
         {
 			path: "mission-point",
 			name: "MissionPoint",
 			component: MissionPoint,
-			meta: { requiresAuth: true }
+			meta: { requiresAuth: true}
         },
         {
 			path: "industry-manage",
 			name: "IndustryManage",
 			component: IndustryManage,
-			meta: { requiresAuth: true }
+			meta: { requiresAuth: true}
         },
 		{
 			path:'*',
