@@ -65,13 +65,11 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="" name="cover" class="col-sm-4 col-form-label">主圖檔名</label>
+                            <label for="" name="cover" class="col-sm-4 col-form-label">主圖連結</label>
                             <div class="col-sm-8">
-                            <input type="file"  name="attachment[]" class="form-control" id="cover" placeholder="主圖檔名 ex:example.jpg" 
-                            @change="filterFileName($event)" 
-                            :class="{'is-invalid': errors.has('cover')}" 
-                         
-                            >
+                            <input type="text"  name="cover" class="form-control"  placeholder="請輸入主圖連結" 
+                             v-model="editItem.cover"
+                            :class="{'is-invalid': errors.has('cover')}">
                              <small  class="text-primary">請輸入圖片所在位置的網址 尺寸：至少 800 x 600 圖片格式：JPG、PNG 檔案大小：1MB 內</small>
                             </div>
                         </div>
@@ -142,7 +140,7 @@
                                     <option value="">請選擇</option>
                                     <option v-for="item in industry" 
                                         :key="item.docId"
-                                        :value="item.docId">{{item.zh_tw}}
+                                        :value="item.zh_tw">{{item.zh_tw}}
                                     </option>
                                 </select>
                             </div>
@@ -295,9 +293,13 @@ export default {
             ]
         }
     },
-   components:{
-    VueGoodTable,
-   },
+    metaInfo: {
+        // title will be injected into parent titleTemplate
+        title: '任務管理',
+    },
+    components:{
+        VueGoodTable,
+    },
     methods:{
          filterFileName(event){
             let vm = this;

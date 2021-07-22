@@ -1,9 +1,9 @@
 <template>
     <div>
-         <div class="side">
-            <div class="side_clode"><i class="fas fa-times"></i></div>
+         <div class="side" :class="{'active':sideOpen}">
+            <div class="side_clode" @click="sideOpen=false"><i class="fas fa-times"></i></div>
             <div class="inner">
-                <router-link  to="/about">任務旋轉門</router-link>
+                <router-link to="/about">任務旋轉門</router-link>
                 <router-link to="/missions">任務列表</router-link>
             </div>
         </div>
@@ -14,7 +14,7 @@
                     <router-link  to="/about">任務旋轉門</router-link>
                     <router-link to="/missions">任務列表</router-link>
                 </div>
-                <div class="side_open">
+                <div class="side_open" @click="sideOpen=true">
                     <i class="fas fa-bars"></i>
                 </div>
             </div>
@@ -25,6 +25,12 @@
 
 <script>
 export default {
-    neme:'Header'
+    neme:'Header',
+    data(){
+        return{
+            sideOpen:false
+        }
+    },
+   
 }
 </script>

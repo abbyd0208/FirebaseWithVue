@@ -1,7 +1,7 @@
 <template>
     <div class="admin">
         <Alert></Alert>
-        <header class="d-flex justify-content-between">
+        <header class="d-flex justify-content-between align-items-center">
             <h4>任務旋轉門後台</h4>
             <a class="btn btn-light" href="#" @click="signOut">登出</a>
         </header>

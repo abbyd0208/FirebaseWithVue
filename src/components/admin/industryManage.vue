@@ -14,7 +14,6 @@
                             enabled: true,
                             trigger: 'enter',
                             placeholder: '搜尋表格',
-                            
                         }"
                     >
                     <div slot="emptystate">
@@ -116,6 +115,10 @@ export default {
                 },
             ]
         }
+    },
+    metaInfo: {
+        // title will be injected into parent titleTemplate
+        title: '產業標籤',
     },
     components:{
        VueGoodTable,

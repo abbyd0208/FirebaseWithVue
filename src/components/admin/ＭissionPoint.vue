@@ -109,6 +109,10 @@ export default {
             }
         }
     },
+    metaInfo: {
+        // title will be injected into parent titleTemplate
+        title: '焦點管理',
+    },
     filters: {
         filterSubject: function(value,id) {
             if (!value) return '';
@@ -116,10 +120,6 @@ export default {
             console.log(value)
             return value;
         }
-    },
-    computed:{
-    
-        
     },
     methods:{
         findSubject(missionId){

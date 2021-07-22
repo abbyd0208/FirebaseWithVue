@@ -1,14 +1,16 @@
 <template>
-  <div>
-	<form class="form-signin" @submit.prevent="signin">
-		<h1 class="h3 mb-3 font-weight-normal">登入任務旋轉門後台</h1>
-		<label for="inputEmail" class="sr-only">Email address</label>
-		<input type="email" id="inputEmail" class="form-control" placeholder="請輸入信箱" v-model="user.username" required autofocus>
-		<label for="inputPassword" class="sr-only">Password</label>
-		<input type="password" id="inputPassword" class="form-control" placeholder="密碼" v-model="user.password" required>
-		<button class="btn btn-lg btn-primary btn-block" type="submit">登入</button>
-		<p class="mt-5 mb-3 text-muted">&copy; 2021 CiRCLELiNKS 智合圈</p>
-	</form>
+  <div class="login">
+    <form class="form-signin" @submit.prevent="signin">
+        <h3 class="font-weight-normal text-center">任務旋轉門後台</h3>
+         <img class="pic" src="../assets/images/plans.png" alt="">
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="email" id="inputEmail" class="form-control" placeholder="請輸入信箱" v-model="user.username" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="密碼" v-model="user.password" required>
+
+        <button class="btn btn-primary btn-block mt-3" type="submit">登入</button>
+        <p class="mt-5 mb-3 text-muted">&copy; 2021 CiRCLELiNKS 智合圈</p>
+    </form>
   </div>
 </template>
 

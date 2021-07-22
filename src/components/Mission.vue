@@ -18,7 +18,7 @@
                         </div>
                         <div class="col-12 col-md-4 mr-lg-5">
                             <div class="cover">
-                                <!-- <img :src="imgSrc" alt=""> -->
+                                <img :src="page.cover" alt="">
                             </div>
                         </div>
                         <div class="col-12 col-md-7">

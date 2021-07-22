@@ -53,7 +53,7 @@
                         >
                         <div>
                             <div class="cover">
-                                <!-- <img :src=" require(`@/assets/images/cover/${item.cover}`)" alt=""> -->
+                                <img :src="item.cover" alt="">
                             </div>
                             <div class="item">
                                 <i class="fas fa-clock"></i>
@@ -119,7 +119,7 @@ export default {
     },
     metaInfo: {
         // title will be injected into parent titleTemplate
-        title: 'CiRCLELiNKS 任務旋轉門-任務列表',
+        title: '任務旋轉門-任務列表',
     },
     computed:{
        filterMissionEnable(){

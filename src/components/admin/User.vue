@@ -45,6 +45,10 @@ export default {
             edit:{}
         }
     },
+    metaInfo: {
+        // title will be injected into parent titleTemplate
+        title: '使用者管理',
+    },
     methods:{
         onchange(val,e){
             let vm = this;

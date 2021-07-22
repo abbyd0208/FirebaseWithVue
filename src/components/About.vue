@@ -154,5 +154,9 @@ export default {
     components:{
         Header
     },
+    metaInfo: {
+        // title will be injected into parent titleTemplate
+        title: '任務旋轉門-關於',
+    },
 }
 </script>
