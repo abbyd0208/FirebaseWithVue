@@ -6,10 +6,10 @@ stages:
 test:
  stage: test
  script: 
-  - echo "Building Beta Server" 
-  - rsync -ap . ~/wwwroot/${CI_PROJECT_NAME}
-  - echo "Rsyncing ~/wwwroot/${CI_PROJECT_NAME}/ to remote beta server"
-  - rsync -ap  --no-links --exclude '/.git' --exclude '/webpack.config.js' --exclude '/package.*'  ${CI_PROJECT_DIR}/ git@210.61.165.235:/home/git/wwwroot/needs.circlelinks.net
+  - echo "Building ${CI_PROJECT_NAME} DEV" 
+  #- rsync -ap . ~/wwwroot/${CI_PROJECT_NAME}
+  - echo "Rsyncing ${CI_PROJECT_DIR}/ to remote server"
+  - rsync -ap  --no-links --exclude '/.git' --exclude '/webpack.config.js' --exclude '/package.*'  ${CI_PROJECT_DIR}/ www@192.168.100.65:/home/www/wwwroot/needs.circlelinks.net_php71/
  only:
   - beta
 
@@ -20,9 +20,9 @@ test:
 deploy_staging:
   stage: deploy
   script:
-    - echo "Building needs.circlelinks.net Server"
-    - echo "Rsyncing ${CI_PROJECT_DIR}/ to remote server"
-    - rsync -ap  --no-links --exclude '/.git' --exclude '/webpack.config.js' --exclude '/package.*'  ${CI_PROJECT_DIR}/ www@192.168.100.65:/home/www/wwwroot/needs.circlelinks.net_php71/
+    - echo "Building ${CI_PROJECT_NAME} PRODUCTION"
+    - echo "Rsyncing ~/wwwroot/${CI_PROJECT_NAME}/ to remote beta server"
+    - rsync -ap  --no-links --exclude '/.git' --exclude '/webpack.config.js' --exclude '/package.*'  ${CI_PROJECT_DIR}/ git@210.61.165.235:/home/git/wwwroot/needs.circlelinks.net
     # - echo "Deploying Production server TW-WEB-1 environment"
     # - echo ${CI_PROJECT_DIR}
     # - cp .env.production .env
