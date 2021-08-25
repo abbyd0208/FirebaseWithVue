@@ -1,0 +1,33 @@
+a{ text-decoration: none;}
+*{ text-decoration: none; margin: 0; padding: 0;}
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;800&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
+
+$blue:#1061A3;
+$blueLight:#E8F5FF;
+$blueLighter:#62FBFF;
+
+$greenDark:#45A7B9;
+$greenLight:#4DC6C9;
+$greenLiter:#D7F5F5;
+
+
+$black:#222;
+$grey:#807F7F;
+$white:#F9FAFD;
+
+$gradientBlue:linear-gradient(90deg, #1061A3 31.79%, rgba(69, 167, 185, 0) 157.71%);
+$gradientgreen:linear-gradient(90deg, $greenLight 31.79%, rgba(69, 167, 185, 0) 157.71%);
+
+img{ max-width: 100%;}
+
+a{ color:$blue;}
+ul{ list-style: none;}
+
+body {
+    font-family:'Arial', 'Noto Sans TC','Microsoft JhengHei', sans-serif,;
+    color: $black;
+    line-height: 1.8;
+}
+
