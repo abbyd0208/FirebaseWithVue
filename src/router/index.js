@@ -21,7 +21,7 @@ export default new Router({
     // 讓一進來預設導頁到MissionList
     {
       path: "/",
-      redirect:'/About'
+      redirect:'/missions'
     },
 	// 讓一進來預設導頁到MissionList
 	{

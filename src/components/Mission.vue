@@ -105,7 +105,7 @@ export default {
             date:new Date(),
             url:window.location.href,
             copy:false,
-            userId:'',
+            missionId:'',
         }
     },
     components:{
@@ -114,12 +114,6 @@ export default {
     metaInfo(){
         return{
             title: `CiRCLELiNKS 任務旋轉門-${this.page.subject}`,
-        }
-    },
-    computed:{
-     
-        imgSrc(){
-            return require(`@/assets/images/cover/${this.page.cover}`)
         }
     },
     methods:{
@@ -136,7 +130,7 @@ export default {
             },1000)
         },
         getCollction(){
-            let docRef = db.collection('missions').doc(this.userId);
+            let docRef = db.collection('missions').doc(this.missionId);
             docRef
             .get()
             .then((doc) => {
@@ -155,7 +149,7 @@ export default {
     },
     created(){
         console.log(this.$route.params.missionId);
-        this.userId = this.$route.params.missionId;
+        this.missionId = this.$route.params.missionId;
         this.getCollction();
     }
 }
